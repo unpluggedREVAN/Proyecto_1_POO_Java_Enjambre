@@ -19,6 +19,9 @@ public class Tablero implements ActionListener{
     int[] posObsX = new int[]{271,286,271,286, 91,106,91,106};
     int[] posObsY = new int[]{271,271,286,286, 271,271,286,286}; 
 
+    int[] posRecuX = new int[]{376,391,376,391, 1191,1106,1191,1106};
+    int[] posRecuY = new int[]{151,151,166,166, 1271,1271,1286,1286}; 
+
     int generalX = 76;
     int generalY = 76;
 
@@ -30,6 +33,7 @@ public class Tablero implements ActionListener{
         frame.setVisible(true);
         ingresaRecolector();
         ingresaObstaculo();
+        ingresaRecurso();
     }
 
     /*public void actualizarPantalla(){
@@ -49,6 +53,7 @@ public class Tablero implements ActionListener{
             prRec.X = generalX;
             generalY += 30;
             prRec.Y = generalY;
+            prRec.rangoBusca = false;
             Recolector.recolectores.add(prRec);
             //recolectores.add(prRec);
             cont += 1;
@@ -61,6 +66,15 @@ public class Tablero implements ActionListener{
             prObs.X = posObsX[i];
             prObs.Y = posObsY[i];
             Obstaculo.obstaculos.add(prObs);
+        }
+    }
+
+    public void ingresaRecurso (){ // Método prueba
+        for (int i = 0; i < posObsX.length; i++){
+            Recurso prRecu = new Recurso();
+            prRecu.X = posRecuX[i];
+            prRecu.Y = posRecuY[i];
+            Recurso.recursos.add(prRecu);
         }
     }
 
@@ -88,6 +102,10 @@ public class Tablero implements ActionListener{
 
                 for (int i=0;i<Obstaculo.obstaculos.size();i++) { // Ciclo que recorre la lista fichas
                     Obstaculo.obstaculos.get(i).dibujar(g);
+                }
+
+                for (int i=0;i<Recurso.recursos.size();i++) { // Ciclo que recorre la lista fichas
+                    Recurso.recursos.get(i).dibujar(g);
                 }
 
                 testR.paintRec(g); // individual
@@ -120,6 +138,10 @@ public class Tablero implements ActionListener{
     public void moverTodos(){
         for (int i=0;i<Recolector.recolectores.size();i++) { // Ciclo que recorre la lista fichas
             Recolector.recolectores.get(i).moverAgente();
+            int varX = Recolector.recolectores.get(i).X;
+            int varY = Recolector.recolectores.get(i).Y;
+            Recolector.recolectores.get(i).calcularArea(varX, varY);
+            
             //int varX = recolectores.get(i).X;
             //System.out.println(varX);
 
@@ -131,7 +153,7 @@ public class Tablero implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(botonPrincipal)){
-            System.out.println("Se presionó el botón principal");
+            //System.out.println("Se presionó el botón principal");
             testR.moverAgente();
             moverTodos();
             //System.out.println("Se presionó el botón principal");
