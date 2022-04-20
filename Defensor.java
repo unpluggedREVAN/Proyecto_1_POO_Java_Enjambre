@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.util.Random;
 import java.util.*;
 
-public class Recolector extends Agente{
+public class Defensor extends Agente{
     public boolean carry;
     public boolean rangoBusca;
     static public int auxX;
@@ -16,21 +16,21 @@ public class Recolector extends Agente{
     //static public int encuentraX;
     //static public int encuentraY;
 
-    static ArrayList<Recolector> recolectores = new ArrayList<Recolector>();
+    static ArrayList<Defensor> defensores = new ArrayList<Defensor>();
 
     Random random = new Random();
     int rnd = random.nextInt(42);
 
-    public Recolector(){
+    public Defensor(){
         carry = false;
         rangoBusca = false;
     }
 
     public boolean VerificaCoor(int dir, int xA, int yA){
         if (dir == 1){
-            for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
-                if (recolectores.get(i).X == xA){
-                    if (recolectores.get(i).Y == yA - 15) {
+            for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+                if (defensores.get(i).X == xA){
+                    if (defensores.get(i).Y == yA - 15) {
                         return false;
                     }
                 }
@@ -38,9 +38,9 @@ public class Recolector extends Agente{
             return true;
         }
         if (dir == 2){
-            for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
-                if (recolectores.get(i).Y == yA){
-                    if (recolectores.get(i).X == xA + 15) {
+            for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+                if (defensores.get(i).Y == yA){
+                    if (defensores.get(i).X == xA + 15) {
                         return false;
                     }
                 }
@@ -48,9 +48,9 @@ public class Recolector extends Agente{
             return true;
         }
         if (dir == 3){
-            for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
-                if (recolectores.get(i).X == xA){
-                    if (recolectores.get(i).Y == yA + 15) {
+            for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+                if (defensores.get(i).X == xA){
+                    if (defensores.get(i).Y == yA + 15) {
                         return false;
                     }
                 }
@@ -58,9 +58,9 @@ public class Recolector extends Agente{
             return true;
         }
         if (dir == 4){
-            for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
-                if (recolectores.get(i).Y == yA){
-                    if (recolectores.get(i).X == xA - 15) {
+            for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+                if (defensores.get(i).Y == yA){
+                    if (defensores.get(i).X == xA - 15) {
                         return false;
                     }
                 }
@@ -211,7 +211,7 @@ public class Recolector extends Agente{
                 if (Y+15 <= 736){
                     if (rangoBusca == false){
                         if ((VerificaCoor(3, X, Y) == true) && (Obstaculo.CoorObs(3, X, Y) == true)){
-                            if (Recurso.CoorRecu(2, X, Y) == true){
+                            if (Recurso.CoorRecu(3, X, Y) == true){
                                 Y += 15;
                             }
                         }
@@ -229,7 +229,7 @@ public class Recolector extends Agente{
                 if (X-15 > 0){
                     if (rangoBusca == false){
                         if ((VerificaCoor(4, X, Y) == true) && (Obstaculo.CoorObs(4, X, Y) == true)){
-                            if (Recurso.CoorRecu(2, X, Y) == true){
+                            if (Recurso.CoorRecu(4, X, Y) == true){
                                 X -= 15;
                             }
                         }
@@ -306,16 +306,16 @@ public class Recolector extends Agente{
         carry = false;
     }
 
-    public void paintRec(Graphics g){
+    public void paintDef(Graphics g){
         if (mov == 1){
-            g.setColor(Color.red);
+            g.setColor(Color.GRAY);
             g.fillRect(X, Y, 14, 14);
         }
         if (mov == 2){
-            g.setColor(Color.red);
+            g.setColor(Color.GRAY);
             g.fillRect(X, Y, 14, 14);
 
-            g.setColor(Color.green);
+            g.setColor(Color.GREEN);
             g.fillRect(X+3, Y+3, 7, 7);
         }
         

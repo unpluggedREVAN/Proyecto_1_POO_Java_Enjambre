@@ -7,6 +7,7 @@ public abstract class Agente {
     int X;
     int Y;
     int direccion;
+    int mov;
 
     //static ArrayList<Recolector> recolectores = new ArrayList<Recolector>();
 

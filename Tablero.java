@@ -16,8 +16,8 @@ public class Tablero implements ActionListener{
     JPanel panelBotones;
     JButton botonPrincipal;
     //ArrayList<Recolector> recolectores = new ArrayList<Recolector>(); // Genera un arreglo de objetos clase Ficha
-    int[] posObsX = new int[]{271,286,271,286, 91,106,91,106};
-    int[] posObsY = new int[]{271,271,286,286, 271,271,286,286}; 
+    int[] posObsX = new int[]{271,286,271,286, 91,106,91,106, 271,286,271,286};
+    int[] posObsY = new int[]{271,271,286,286, 271,271,286,286, 136,136,151,151}; 
 
     int[] posRecuX = new int[]{376,391,376,391, 1191,1106,1191,1106};
     int[] posRecuY = new int[]{151,151,166,166, 1271,1271,1286,1286}; 
@@ -32,8 +32,10 @@ public class Tablero implements ActionListener{
         crearTablero(1, 0, 0);
         frame.setVisible(true);
         ingresaRecolector();
+        ingresaDefensor();
         ingresaObstaculo();
         ingresaRecurso();
+        //ingresaDefensor();
     }
 
     /*public void actualizarPantalla(){
@@ -43,7 +45,6 @@ public class Tablero implements ActionListener{
     }*/
         
 
-    Recolector testR = new Recolector();
 
     public void ingresaRecolector (){ // Método prueba
         int cont = 0;
@@ -54,10 +55,39 @@ public class Tablero implements ActionListener{
             generalY += 30;
             prRec.Y = generalY;
             prRec.rangoBusca = false;
+            prRec.mov = 1;
             Recolector.recolectores.add(prRec);
             //recolectores.add(prRec);
             cont += 1;
         }
+
+        Recolector testR = new Recolector(); // Solo para pruebas
+        testR.X = 421;
+        testR.Y = 166;
+        testR.mov = 1;
+        Recolector.recolectores.add(testR);
+    }
+
+    public void ingresaDefensor (){ // Método prueba
+        int cont = 0;
+        while (cont <= 5){
+            Defensor prDef = new Defensor();
+            generalX += 45;
+            prDef.X = generalX;
+            generalY += 30;
+            prDef.Y = generalY;
+            prDef.rangoBusca = false;
+            prDef.mov = 1;
+            Defensor.defensores.add(prDef);
+            //recolectores.add(prRec);
+            cont += 1;
+        }
+
+        Defensor testD = new Defensor(); // Solo para pruebas
+        testD.X = 421;
+        testD.Y = 136;
+        testD.mov = 1;
+        Defensor.defensores.add(testD); 
     }
 
     public void ingresaObstaculo (){ // Método prueba
@@ -108,7 +138,14 @@ public class Tablero implements ActionListener{
                     Recurso.recursos.get(i).dibujar(g);
                 }
 
-                testR.paintRec(g); // individual
+                for (int i=0;i<Defensor.defensores.size();i++) { // Ciclo que recorre la lista fichas
+                    Defensor.defensores.get(i).paintDef(g);
+                }
+
+                Hormiguero mapa = new Hormiguero();
+                mapa.dibujar(g);
+
+                //testR.paintRec(g); // individual
 
                 /*if (opcion == 2){
                     System.out.println("Entró en la opción"); // Prueba
@@ -141,6 +178,10 @@ public class Tablero implements ActionListener{
             int varX = Recolector.recolectores.get(i).X;
             int varY = Recolector.recolectores.get(i).Y;
             Recolector.recolectores.get(i).calcularArea(varX, varY);
+
+
+            
+            
             
             //int varX = recolectores.get(i).X;
             //System.out.println(varX);
@@ -148,13 +189,19 @@ public class Tablero implements ActionListener{
             //int varY = recolectores.get(i).Y;
             //System.out.println(varY);
         }
+        for (int i=0;i<Defensor.defensores.size();i++) { // Ciclo que recorre la lista fichas
+            Defensor.defensores.get(i).moverAgente();
+            int varDX = Defensor.defensores.get(i).X;
+            int varDY = Defensor.defensores.get(i).Y;
+            Defensor.defensores.get(i).calcularArea(varDX, varDY);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(botonPrincipal)){
             //System.out.println("Se presionó el botón principal");
-            testR.moverAgente();
+            //testR.moverAgente();
             moverTodos();
             //System.out.println("Se presionó el botón principal");
             //int xRec = testR.X;

@@ -1,36 +1,37 @@
-// Tarea jerarquía de clases - Herencia
-// Jose Pablo Agüero Mora (2021126372) - Grupo 2
-// SubClase Circulo
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.*;
 
-public class Recolector extends Agente{
-    public boolean carry;
-    public boolean rangoBusca;
-    static public int auxX;
-    static public int auxY;
 
-    //static public int encuentraX;
-    //static public int encuentraY;
+/**
+ *
+ * @author Diana
+ */
+public class Defensor3 extends Agente {
+    private boolean atacar;
+    public boolean rangoAtaque;
 
-    static ArrayList<Recolector> recolectores = new ArrayList<Recolector>();
+    public int auxX;
+    public int auxY;
 
+    static ArrayList<Defensor3> defensores = new ArrayList<Defensor3>();
+    
     Random random = new Random();
     int rnd = random.nextInt(42);
-
-    public Recolector(){
-        carry = false;
-        rangoBusca = false;
+    
+    
+    public Defensor3(){
+        atacar= true;
+        rangoAtaque= true;
     }
 
     public boolean VerificaCoor(int dir, int xA, int yA){
         if (dir == 1){
-            for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
-                if (recolectores.get(i).X == xA){
-                    if (recolectores.get(i).Y == yA - 15) {
+            for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+                if (defensores.get(i).X == xA){
+                    if (defensores.get(i).Y == yA - 15) {
                         return false;
                     }
                 }
@@ -38,9 +39,9 @@ public class Recolector extends Agente{
             return true;
         }
         if (dir == 2){
-            for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
-                if (recolectores.get(i).Y == yA){
-                    if (recolectores.get(i).X == xA + 15) {
+            for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+                if (defensores.get(i).Y == yA){
+                    if (defensores.get(i).X == xA + 15) {
                         return false;
                     }
                 }
@@ -48,9 +49,9 @@ public class Recolector extends Agente{
             return true;
         }
         if (dir == 3){
-            for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
-                if (recolectores.get(i).X == xA){
-                    if (recolectores.get(i).Y == yA + 15) {
+            for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+                if (defensores.get(i).X == xA){
+                    if (defensores.get(i).Y == yA + 15) {
                         return false;
                     }
                 }
@@ -58,9 +59,9 @@ public class Recolector extends Agente{
             return true;
         }
         if (dir == 4){
-            for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
-                if (recolectores.get(i).Y == yA){
-                    if (recolectores.get(i).X == xA - 15) {
+            for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+                if (defensores.get(i).Y == yA){
+                    if (defensores.get(i).X == xA - 15) {
                         return false;
                     }
                 }
@@ -75,7 +76,7 @@ public class Recolector extends Agente{
         for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
             if (Recurso.recursos.get(i).X == xA){
                 if (Recurso.recursos.get(i).Y == yA - 15) { // Originalmente era 15, luego se probó con 45
-                    rangoBusca = true;
+                    rangoAtaque = true;
                     auxX = Recurso.recursos.get(i).X;
                     auxY = Recurso.recursos.get(i).Y;
                     return true;
@@ -86,7 +87,7 @@ public class Recolector extends Agente{
         for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
             if (Recurso.recursos.get(i).X == xA - 15){
                 if (Recurso.recursos.get(i).Y == yA - 15) {
-                    rangoBusca = true;
+                    rangoAtaque = true;
                     auxX = Recurso.recursos.get(i).X;
                     auxY = Recurso.recursos.get(i).Y;
                     return true;
@@ -97,7 +98,7 @@ public class Recolector extends Agente{
         for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
             if (Recurso.recursos.get(i).X == xA + 15){
                 if (Recurso.recursos.get(i).Y == yA - 15) {
-                    rangoBusca = true;
+                    rangoAtaque = true;
                     auxX = Recurso.recursos.get(i).X;
                     auxY = Recurso.recursos.get(i).Y;
                     return true;
@@ -108,7 +109,7 @@ public class Recolector extends Agente{
         for (int i=0;i<Recurso.recursos.size();i++) { // Ciclo que recorre la lista fichas
             if (Recurso.recursos.get(i).Y == yA){
                 if (Recurso.recursos.get(i).X == xA + 15) {
-                    rangoBusca = true;
+                    rangoAtaque = true;
                     auxX = Recurso.recursos.get(i).X;
                     auxY = Recurso.recursos.get(i).Y;
                     return true;
@@ -119,7 +120,7 @@ public class Recolector extends Agente{
         for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
             if (Recurso.recursos.get(i).X == xA){
                 if (Recurso.recursos.get(i).Y == yA + 15) {
-                    rangoBusca = true;
+                    rangoAtaque = true;
                     auxX = Recurso.recursos.get(i).X;
                     auxY = Recurso.recursos.get(i).Y;
                     return true;
@@ -130,7 +131,7 @@ public class Recolector extends Agente{
         for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
             if (Recurso.recursos.get(i).X == xA - 15){
                 if (Recurso.recursos.get(i).Y == yA + 15) {
-                    rangoBusca = true;
+                    rangoAtaque = true;
                     auxX = Recurso.recursos.get(i).X;
                     auxY = Recurso.recursos.get(i).Y;
                     return true;
@@ -141,7 +142,7 @@ public class Recolector extends Agente{
         for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
             if (Recurso.recursos.get(i).X == xA + 15){
                 if (Recurso.recursos.get(i).Y == yA + 15) {
-                    rangoBusca = true;
+                    rangoAtaque = true;
                     auxX = Recurso.recursos.get(i).X;
                     auxY = Recurso.recursos.get(i).Y;
                     return true;
@@ -152,14 +153,14 @@ public class Recolector extends Agente{
         for (int i=0;i<Recurso.recursos.size();i++) { // Ciclo que recorre la lista fichas
             if (Recurso.recursos.get(i).Y == yA){
                 if (Recurso.recursos.get(i).X == xA - 15) {
-                    rangoBusca = true;
+                    rangoAtaque = true;
                     auxX = Recurso.recursos.get(i).X;
                     auxY = Recurso.recursos.get(i).Y;
                     return true;
                 }
             }
         }
-        rangoBusca = false;
+        rangoAtaque = false;
         return false;
         
     }
@@ -173,7 +174,7 @@ public class Recolector extends Agente{
         if (mov == 1){
             if (direccion == 1){
                 if (Y-15 > 0){
-                    if (rangoBusca == false){
+                    if (rangoAtaque == false){
                         if ((VerificaCoor(1, X, Y) == true) && (Obstaculo.CoorObs(1, X, Y) == true)){
                             if (Recurso.CoorRecu(1, X, Y) == true){
                                 Y -= 15;
@@ -191,7 +192,7 @@ public class Recolector extends Agente{
             }
             if (direccion == 2){
                 if (X + 15 <= 736){
-                    if (rangoBusca == false){
+                    if (rangoAtaque == false){
                         if ((VerificaCoor(2, X, Y) == true) && (Obstaculo.CoorObs(2, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
                                 X += 15;
@@ -209,7 +210,7 @@ public class Recolector extends Agente{
             }
             if (direccion == 3){
                 if (Y+15 <= 736){
-                    if (rangoBusca == false){
+                    if (rangoAtaque == false){
                         if ((VerificaCoor(3, X, Y) == true) && (Obstaculo.CoorObs(3, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
                                 Y += 15;
@@ -227,7 +228,7 @@ public class Recolector extends Agente{
             }
             if (direccion == 4){
                 if (X-15 > 0){
-                    if (rangoBusca == false){
+                    if (rangoAtaque == false){
                         if ((VerificaCoor(4, X, Y) == true) && (Obstaculo.CoorObs(4, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
                                 X -= 15;
@@ -303,21 +304,21 @@ public class Recolector extends Agente{
     }
 
     public void accionAgente(){
-        carry = false;
+        atacar = false;
     }
 
-    public void paintRec(Graphics g){
+    public void paintDef(Graphics g){
         if (mov == 1){
-            g.setColor(Color.red);
+            g.setColor(Color.GRAY);
             g.fillRect(X, Y, 14, 14);
         }
         if (mov == 2){
-            g.setColor(Color.red);
+            g.setColor(Color.GRAY);
             g.fillRect(X, Y, 14, 14);
 
-            g.setColor(Color.green);
+            g.setColor(Color.BLUE);
             g.fillRect(X+3, Y+3, 7, 7);
         }
         
     }
-}
+} 
