@@ -26,7 +26,7 @@ public class Recolector extends Agente{
         rangoBusca = false;
     }
 
-    public boolean VerificaCoor(int dir, int xA, int yA){
+    static public boolean VerificaCoor(int dir, int xA, int yA){
         if (dir == 1){
             for (int i=0;i<recolectores.size();i++) { // Ciclo que recorre la lista fichas
                 if (recolectores.get(i).X == xA){
@@ -176,7 +176,9 @@ public class Recolector extends Agente{
                     if (rangoBusca == false){
                         if ((VerificaCoor(1, X, Y) == true) && (Obstaculo.CoorObs(1, X, Y) == true)){
                             if (Recurso.CoorRecu(1, X, Y) == true){
-                                Y -= 15;
+                                if (Defensor.VerificaCoor2(1, X, Y) == true){
+                                    Y -= 15;
+                                }
                             }
                         }
                     }
@@ -185,6 +187,8 @@ public class Recolector extends Agente{
                         mov = 2;
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
+
+                        Recurso.bajarVida();
                     }
                     
                 }
@@ -194,7 +198,9 @@ public class Recolector extends Agente{
                     if (rangoBusca == false){
                         if ((VerificaCoor(2, X, Y) == true) && (Obstaculo.CoorObs(2, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
-                                X += 15;
+                                if (Defensor.VerificaCoor2(2, X, Y) == true){
+                                    X += 15;
+                                }
                             }
                         }
                     }
@@ -203,6 +209,8 @@ public class Recolector extends Agente{
                         System.out.println("Se encontró recurso");
                         mov = 2;
                         System.out.println("Se va a devolver");
+
+                        Recurso.bajarVida();
                     }
                     
                 }
@@ -212,7 +220,9 @@ public class Recolector extends Agente{
                     if (rangoBusca == false){
                         if ((VerificaCoor(3, X, Y) == true) && (Obstaculo.CoorObs(3, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
-                                Y += 15;
+                                if (Defensor.VerificaCoor2(3, X, Y) == true){
+                                    Y += 15;
+                                }
                             }
                         }
                     }
@@ -221,6 +231,8 @@ public class Recolector extends Agente{
                         mov = 2;
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
+
+                        Recurso.bajarVida();
                     }
                     
                 }
@@ -230,7 +242,9 @@ public class Recolector extends Agente{
                     if (rangoBusca == false){
                         if ((VerificaCoor(4, X, Y) == true) && (Obstaculo.CoorObs(4, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
-                                X -= 15;
+                                if (Defensor.VerificaCoor2(4, X, Y) == true){
+                                    X -= 15;
+                                }
                             }
                         }
                     }
@@ -239,6 +253,8 @@ public class Recolector extends Agente{
                         mov = 2;
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
+
+                        Recurso.bajarVida();
                     }
                 }
             }

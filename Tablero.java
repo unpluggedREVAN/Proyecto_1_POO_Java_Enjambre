@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,12 +16,16 @@ public class Tablero implements ActionListener{
     JFrame frame;
     JPanel panelBotones;
     JButton botonPrincipal;
+
     //ArrayList<Recolector> recolectores = new ArrayList<Recolector>(); // Genera un arreglo de objetos clase Ficha
     int[] posObsX = new int[]{271,286,271,286, 91,106,91,106, 271,286,271,286};
     int[] posObsY = new int[]{271,271,286,286, 271,271,286,286, 136,136,151,151}; 
 
-    int[] posRecuX = new int[]{376,391,376,391, 1191,1106,1191,1106};
-    int[] posRecuY = new int[]{151,151,166,166, 1271,1271,1286,1286}; 
+    int[] posRecuX = new int[]{376,391,376,391}; // 1191,1106,1191,1106
+    int[] posRecuY = new int[]{151,151,166,166}; // 1271,1271,1286,1286
+
+    int[] posAmeX = new int[]{391,406,391,406}; 
+    int[] posAmeY = new int[]{241,241,256,256};
 
     int generalX = 76;
     int generalY = 76;
@@ -35,6 +40,7 @@ public class Tablero implements ActionListener{
         ingresaDefensor();
         ingresaObstaculo();
         ingresaRecurso();
+        ingresaAmenaza();
         //ingresaDefensor();
     }
 
@@ -57,6 +63,7 @@ public class Tablero implements ActionListener{
             prRec.rangoBusca = false;
             prRec.mov = 1;
             Recolector.recolectores.add(prRec);
+            Agente.agentes.add(prRec);
             //recolectores.add(prRec);
             cont += 1;
         }
@@ -66,6 +73,7 @@ public class Tablero implements ActionListener{
         testR.Y = 166;
         testR.mov = 1;
         Recolector.recolectores.add(testR);
+        Agente.agentes.add(testR);
     }
 
     public void ingresaDefensor (){ // Método prueba
@@ -79,6 +87,7 @@ public class Tablero implements ActionListener{
             prDef.rangoBusca = false;
             prDef.mov = 1;
             Defensor.defensores.add(prDef);
+            Agente.agentes.add(prDef);
             //recolectores.add(prRec);
             cont += 1;
         }
@@ -87,7 +96,8 @@ public class Tablero implements ActionListener{
         testD.X = 421;
         testD.Y = 136;
         testD.mov = 1;
-        Defensor.defensores.add(testD); 
+        Defensor.defensores.add(testD);
+        Agente.agentes.add(testD);
     }
 
     public void ingresaObstaculo (){ // Método prueba
@@ -99,12 +109,21 @@ public class Tablero implements ActionListener{
         }
     }
 
-    public void ingresaRecurso (){ // Método prueba
-        for (int i = 0; i < posObsX.length; i++){
+    public void ingresaRecurso (){ // Método prueba // Aquí tiraba la excepción del out of bounds
+        for (int i = 0; i < posRecuX.length; i++){
             Recurso prRecu = new Recurso();
             prRecu.X = posRecuX[i];
             prRecu.Y = posRecuY[i];
             Recurso.recursos.add(prRecu);
+        }
+    }
+
+    public void ingresaAmenaza (){ // Método prueba
+        for (int i = 0; i < posAmeX.length; i++){
+            Amenaza prAme = new Amenaza();
+            prAme.X = posAmeX[i];
+            prAme.Y = posAmeY[i];
+            Amenaza.amenazas.add(prAme);
         }
     }
 
@@ -140,6 +159,10 @@ public class Tablero implements ActionListener{
 
                 for (int i=0;i<Defensor.defensores.size();i++) { // Ciclo que recorre la lista fichas
                     Defensor.defensores.get(i).paintDef(g);
+                }
+
+                for (int i=0;i<Amenaza.amenazas.size();i++) { // Ciclo que recorre la lista fichas
+                    Amenaza.amenazas.get(i).paintAme(g);
                 }
 
                 Hormiguero mapa = new Hormiguero();
@@ -193,8 +216,11 @@ public class Tablero implements ActionListener{
             Defensor.defensores.get(i).moverAgente();
             int varDX = Defensor.defensores.get(i).X;
             int varDY = Defensor.defensores.get(i).Y;
+            Defensor.defensores.get(i).calcularAreaAtaque(varDX, varDY); // Verifica si hay una amenaza cerca
             Defensor.defensores.get(i).calcularArea(varDX, varDY);
+
         }
+        //Recurso.estadoRecurso();
     }
 
     @Override

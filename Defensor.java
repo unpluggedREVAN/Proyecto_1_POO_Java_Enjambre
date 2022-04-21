@@ -10,6 +10,7 @@ import java.util.*;
 public class Defensor extends Agente{
     public boolean carry;
     public boolean rangoBusca;
+    public boolean rangoAtaca; // Propio de defensores
     static public int auxX;
     static public int auxY;
 
@@ -24,9 +25,10 @@ public class Defensor extends Agente{
     public Defensor(){
         carry = false;
         rangoBusca = false;
+        rangoAtaca = false;
     }
 
-    public boolean VerificaCoor(int dir, int xA, int yA){
+    static public boolean VerificaCoor2(int dir, int xA, int yA){
         if (dir == 1){
             for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
                 if (defensores.get(i).X == xA){
@@ -164,6 +166,108 @@ public class Defensor extends Agente{
         
     }
 
+    public boolean calcularAreaAtaque(int xA, int yA){ // Cambiar el tipo de función a void
+        
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA){
+                if (Amenaza.amenazas.get(i).Y == yA - 15) { // Originalmente era 15, luego se probó con 45
+                    rangoAtaca = true;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA - 15){
+                if (Amenaza.amenazas.get(i).Y == yA - 15) {
+                    rangoAtaca = true;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA + 15){
+                if (Amenaza.amenazas.get(i).Y == yA - 15) {
+                    rangoAtaca = true;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+        
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Ciclo que recorre la lista fichas
+            if (Amenaza.amenazas.get(i).Y == yA){
+                if (Amenaza.amenazas.get(i).X == xA + 15) {
+                    rangoAtaca = true;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+        
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA){
+                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+                    rangoAtaca = true;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA - 15){
+                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+                    rangoAtaca = true;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA + 15){
+                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+                    rangoAtaca = true;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+        
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Ciclo que recorre la lista fichas
+            if (Amenaza.amenazas.get(i).Y == yA){
+                if (Amenaza.amenazas.get(i).X == xA - 15) {
+                    rangoAtaca = true;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+        rangoAtaca = false;
+        return false;
+        
+    }
+
 
     //implementacion del metodo abstracto
     public void moverAgente(){
@@ -173,79 +277,119 @@ public class Defensor extends Agente{
         if (mov == 1){
             if (direccion == 1){
                 if (Y-15 > 0){
-                    if (rangoBusca == false){
-                        if ((VerificaCoor(1, X, Y) == true) && (Obstaculo.CoorObs(1, X, Y) == true)){
+                    if (rangoAtaca == true && rangoBusca == false){
+                        //mov = 4;
+                        System.out.println("Se encontró amenaza1");
+
+                        Amenaza.bajarVida();
+                    }
+                    if (rangoBusca == false && rangoAtaca == false){
+                        if ((VerificaCoor2(1, X, Y) == true) && (Obstaculo.CoorObs(1, X, Y) == true)){
                             if (Recurso.CoorRecu(1, X, Y) == true){
-                                Y -= 15;
+                                if (Recolector.VerificaCoor(1, X, Y) == true){
+                                    Y -= 15;
+                                }
                             }
                         }
                     }
-                    else{
+                    if (rangoBusca == true){
                         //mov = 3;
                         mov = 2;
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
+
+                        Recurso.bajarVida();
                     }
                     
                 }
             }
             if (direccion == 2){
                 if (X + 15 <= 736){
-                    if (rangoBusca == false){
-                        if ((VerificaCoor(2, X, Y) == true) && (Obstaculo.CoorObs(2, X, Y) == true)){
+                    if (rangoAtaca == true && rangoBusca == false){
+                        //mov = 4;
+                        System.out.println("Se encontró amenaza1");
+
+                        Amenaza.bajarVida();
+                    }
+                    if (rangoBusca == false && rangoAtaca == false){
+                        if ((VerificaCoor2(2, X, Y) == true) && (Obstaculo.CoorObs(2, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
-                                X += 15;
+                                if (Recolector.VerificaCoor(2, X, Y) == true){
+                                    X += 15;
+                                }
                             }
                         }
                     }
-                    else{
+                    if (rangoBusca == true){
                         //mov = 3;
                         System.out.println("Se encontró recurso");
                         mov = 2;
                         System.out.println("Se va a devolver");
+                        
+                        Recurso.bajarVida();
                     }
                     
                 }
             }
             if (direccion == 3){
                 if (Y+15 <= 736){
-                    if (rangoBusca == false){
-                        if ((VerificaCoor(3, X, Y) == true) && (Obstaculo.CoorObs(3, X, Y) == true)){
+                    if (rangoAtaca == true && rangoBusca == false){
+                        //mov = 4;
+                        System.out.println("Se encontró amenaza1");
+
+                        Amenaza.bajarVida();
+                    }
+                    if (rangoBusca == false && rangoAtaca == false){
+                        if ((VerificaCoor2(3, X, Y) == true) && (Obstaculo.CoorObs(3, X, Y) == true)){
                             if (Recurso.CoorRecu(3, X, Y) == true){
-                                Y += 15;
+                                if (Recolector.VerificaCoor(3, X, Y) == true){
+                                    Y += 15;
+                                }
                             }
                         }
                     }
-                    else{
+                    if (rangoBusca == true){
                         //mov = 3;
                         mov = 2;
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
+
+                        Recurso.bajarVida();
                     }
                     
                 }
             }
             if (direccion == 4){
                 if (X-15 > 0){
-                    if (rangoBusca == false){
-                        if ((VerificaCoor(4, X, Y) == true) && (Obstaculo.CoorObs(4, X, Y) == true)){
+                    if (rangoAtaca == true && rangoBusca == false){
+                        //mov = 4;
+                        System.out.println("Se encontró amenaza1");
+
+                        Amenaza.bajarVida();
+                    }
+                    if (rangoBusca == false && rangoAtaca == false){
+                        if ((VerificaCoor2(4, X, Y) == true) && (Obstaculo.CoorObs(4, X, Y) == true)){
                             if (Recurso.CoorRecu(4, X, Y) == true){
-                                X -= 15;
+                                if (Recolector.VerificaCoor(4, X, Y) == true){
+                                    X -= 15;
+                                }
                             }
                         }
                     }
-                    else{
+                    if (rangoBusca == true){
                         //mov = 3;
                         mov = 2;
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
+
+                        Recurso.bajarVida();
                     }
                 }
             }
         }
         if (mov == 2){
             if (X != 1){
-                if (VerificaCoor(4, X, Y) == true){
+                if (VerificaCoor2(4, X, Y) == true){
                     if (Obstaculo.CoorObs(4, X, Y) == true){
                         if (Recurso.CoorRecu(4, X, Y) == true){
                             X -= 15;
@@ -264,7 +408,7 @@ public class Defensor extends Agente{
             }
             else{
                 if (Y != 1){
-                    if (VerificaCoor(1, X, Y) == true){
+                    if (VerificaCoor2(1, X, Y) == true){
                         if (Obstaculo.CoorObs(4, X, Y) == true){
                             if (Recurso.CoorRecu(4, X, Y) == true){
                                 Y -= 15;
@@ -286,18 +430,11 @@ public class Defensor extends Agente{
                 }
             }
         }
-        if (mov == 3){
-            if (X != auxX-15){
-                X -= 15;
-            }
-            else{
-                if (Y != auxY){
-                    Y -= 15;
-                }
-                else{ // Cuando llega al recurso
-                    mov = 2;
-                }
-            }
+        if (mov == 4){
+            System.out.println("Se encontró amenaza2");
+            /*if (rangoAtaca == true){
+                System.out.println("Se encontró amenaza");
+            }*/
         }
         
     }

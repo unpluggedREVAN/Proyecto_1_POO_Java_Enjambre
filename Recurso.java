@@ -11,7 +11,8 @@ public class Recurso {
     int identificador;
     int X;
     int Y;
-    boolean activo;
+    public boolean activo = true;
+    public int vida = 2;
     //int direccion;
     static ArrayList<Recurso> recursos = new ArrayList<Recurso>();
 
@@ -21,11 +22,40 @@ public class Recurso {
         identificador = 0;
         X = 1;
         Y = 1;
+        //vida = 2;
+        //activo = true;
     }
 
     public void dibujar(Graphics g){
-        g.setColor(Color.green);
-        g.fillRect(X, Y, 14, 14);
+        if (vida != 0){
+            g.setColor(Color.green);
+            g.fillRect(X, Y, 14, 14);
+        }
+        else{
+            g.setColor(Color.PINK);
+            g.fillRect(X, Y, 14, 14);
+        }
+        
+    }
+
+    static public void estadoRecurso(){
+        for (int i=0;i<Recurso.recursos.size();i++){
+            if (recursos.get(i).vida == 0){
+                recursos.get(i).activo = false;
+            }
+            else{
+                recursos.get(i).activo = true;
+            }
+        }
+        
+    }
+
+    static public void bajarVida(){
+        for (int i=0;i<recursos.size();i++){
+            recursos.get(i).vida -= 1;
+            //Recurso.vida -= 1;
+            //System.out.println(Recurso.vida);
+        }
     }
 
     static public boolean CoorRecu(int dir, int xA, int yA){
