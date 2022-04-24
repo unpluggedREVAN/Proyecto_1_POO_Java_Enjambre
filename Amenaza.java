@@ -23,9 +23,41 @@ public class Amenaza {
         vida = 5;
     }
     
-    public void accionAgente(){
-        vida -=1;
+    public void reaccion(){
+        if (vida <= 0){
+            respawn();
+            vida = 5;
+
+        }
     }
+
+    static public void respawn(){
+        int numRandom = (int)Math.floor(Math.random()*(49-1)+1);
+        int multiplo = (numRandom * 15) + 1;
+
+        for (int i = 0; i < amenazas.size(); i++){
+            if (i == 0 || i == 3){
+                amenazas.get(i).X = multiplo;
+            }
+            else{
+                amenazas.get(i).X = multiplo + 15;
+            }
+        }
+
+        numRandom = (int)Math.floor(Math.random()*(49-1)+1);
+        multiplo = (numRandom * 15) + 1;
+
+        for (int i = 0; i < amenazas.size(); i++){
+            if (i == 0 || i == 1){
+                amenazas.get(i).Y = multiplo;
+            }
+            else{
+                amenazas.get(i).Y = multiplo + 15;
+            }
+        }
+    }
+
+
     public int getVida(){
         return vida;
     }
@@ -38,7 +70,7 @@ public class Amenaza {
         }
     }
     
-    public void moverAgente(){}
+    //public void moverAgente(){}
     
     public void paintAme(Graphics g){
         if (vida > 0){

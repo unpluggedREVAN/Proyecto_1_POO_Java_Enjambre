@@ -27,7 +27,7 @@ public class Recurso {
     }
 
     public void dibujar(Graphics g){
-        if (vida != 0){
+        if (vida > 0){
             g.setColor(Color.green);
             g.fillRect(X, Y, 14, 14);
         }
@@ -55,6 +55,40 @@ public class Recurso {
             recursos.get(i).vida -= 1;
             //Recurso.vida -= 1;
             //System.out.println(Recurso.vida);
+        }
+    }
+
+    public void reaccion(){
+        if (vida <= 0){
+            respawn();
+            vida = 2;
+
+        }
+    }
+
+    static public void respawn(){
+        int numRandom = (int)Math.floor(Math.random()*(49-1)+1);
+        int multiplo = (numRandom * 15) + 1;
+
+        for (int i = 0; i < recursos.size(); i++){
+            if (i == 0 || i == 3){
+                recursos.get(i).X = multiplo;
+            }
+            else{
+                recursos.get(i).X = multiplo + 15;
+            }
+        }
+
+        numRandom = (int)Math.floor(Math.random()*(49-1)+1);
+        multiplo = (numRandom * 15) + 1;
+
+        for (int i = 0; i < recursos.size(); i++){
+            if (i == 0 || i == 1){
+                recursos.get(i).Y = multiplo;
+            }
+            else{
+                recursos.get(i).Y = multiplo + 15;
+            }
         }
     }
 

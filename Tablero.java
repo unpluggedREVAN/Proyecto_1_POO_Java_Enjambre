@@ -18,8 +18,8 @@ public class Tablero implements ActionListener{
     JButton botonPrincipal;
 
     //ArrayList<Recolector> recolectores = new ArrayList<Recolector>(); // Genera un arreglo de objetos clase Ficha
-    int[] posObsX = new int[]{271,286,271,286, 91,106,91,106, 271,286,271,286};
-    int[] posObsY = new int[]{271,271,286,286, 271,271,286,286, 136,136,151,151}; 
+    int[] posObsX = new int[]{271,286,271,286, 166,181,166,181, 526,541,526,541, 496,511,496,511};
+    int[] posObsY = new int[]{616,616,631,631, 301,301,316,316, 151,151,166,166, 481,481,496,496}; 
 
     int[] posRecuX = new int[]{376,391,376,391}; // 1191,1106,1191,1106
     int[] posRecuY = new int[]{151,151,166,166}; // 1271,1271,1286,1286
@@ -54,12 +54,22 @@ public class Tablero implements ActionListener{
 
     public void ingresaRecolector (){ // Método prueba
         int cont = 0;
-        while (cont <= 5){
+        while (cont <= 15){
+            int numRandom = (int)Math.floor(Math.random()*(49-1)+1);
+            int multiplo = (numRandom * 15) + 1;
+
             Recolector prRec = new Recolector();
             generalX += 30;
-            prRec.X = generalX;
+            prRec.X = multiplo;
+            //prRec.X = generalX;
+
+            numRandom = (int)Math.floor(Math.random()*(49-1)+1);
+            multiplo = (numRandom * 15) + 1;
+
             generalY += 30;
-            prRec.Y = generalY;
+            prRec.Y = multiplo;
+            //prRec.Y = generalY;
+
             prRec.rangoBusca = false;
             prRec.mov = 1;
             Recolector.recolectores.add(prRec);
@@ -69,21 +79,38 @@ public class Tablero implements ActionListener{
         }
 
         Recolector testR = new Recolector(); // Solo para pruebas
-        testR.X = 421;
-        testR.Y = 166;
+        testR.X = 451;
+        testR.Y = 256;
         testR.mov = 1;
         Recolector.recolectores.add(testR);
         Agente.agentes.add(testR);
+
+        Recolector test2 = new Recolector(); // Solo para pruebas
+        test2.X = 421;
+        test2.Y = 166;
+        test2.mov = 1;
+        Recolector.recolectores.add(test2);
+        Agente.agentes.add(test2);
     }
 
     public void ingresaDefensor (){ // Método prueba
         int cont = 0;
-        while (cont <= 5){
+        while (cont <= 15){
+            int numRandom = (int)Math.floor(Math.random()*(49-1)+1);
+            int multiplo = (numRandom * 15) + 1;
+
             Defensor prDef = new Defensor();
             generalX += 45;
-            prDef.X = generalX;
+            prDef.X = multiplo;
+            //prDef.X = generalX;
+
+            numRandom = (int)Math.floor(Math.random()*(49-1)+1);
+            multiplo = (numRandom * 15) + 1;
+
             generalY += 30;
-            prDef.Y = generalY;
+            prDef.Y = multiplo;
+            //prDef.Y = generalY;
+
             prDef.rangoBusca = false;
             prDef.mov = 1;
             Defensor.defensores.add(prDef);
@@ -116,6 +143,7 @@ public class Tablero implements ActionListener{
             prRecu.Y = posRecuY[i];
             Recurso.recursos.add(prRecu);
         }
+        Recurso.respawn();
     }
 
     public void ingresaAmenaza (){ // Método prueba
@@ -125,6 +153,7 @@ public class Tablero implements ActionListener{
             prAme.Y = posAmeY[i];
             Amenaza.amenazas.add(prAme);
         }
+        Amenaza.respawn();
     }
 
     private void crearTablero(int opcion, int x, int y){
@@ -196,14 +225,18 @@ public class Tablero implements ActionListener{
     }
 
     public void moverTodos(){
+        for (int i=0;i<Amenaza.amenazas.size();i++){
+            Amenaza.amenazas.get(i).reaccion();
+        }
+        for (int i=0;i<Recurso.recursos.size();i++){
+            Recurso.recursos.get(i).reaccion();
+        }
         for (int i=0;i<Recolector.recolectores.size();i++) { // Ciclo que recorre la lista fichas
-            Recolector.recolectores.get(i).moverAgente();
             int varX = Recolector.recolectores.get(i).X;
             int varY = Recolector.recolectores.get(i).Y;
             Recolector.recolectores.get(i).calcularArea(varX, varY);
-
-
-            
+            Recolector.recolectores.get(i).calcularHuida(varX, varY);
+            Recolector.recolectores.get(i).moverAgente();
             
             
             //int varX = recolectores.get(i).X;
@@ -213,12 +246,11 @@ public class Tablero implements ActionListener{
             //System.out.println(varY);
         }
         for (int i=0;i<Defensor.defensores.size();i++) { // Ciclo que recorre la lista fichas
-            Defensor.defensores.get(i).moverAgente();
             int varDX = Defensor.defensores.get(i).X;
             int varDY = Defensor.defensores.get(i).Y;
             Defensor.defensores.get(i).calcularAreaAtaque(varDX, varDY); // Verifica si hay una amenaza cerca
             Defensor.defensores.get(i).calcularArea(varDX, varDY);
-
+            Defensor.defensores.get(i).moverAgente();
         }
         //Recurso.estadoRecurso();
     }

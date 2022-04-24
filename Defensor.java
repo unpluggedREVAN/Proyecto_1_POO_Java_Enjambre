@@ -445,11 +445,11 @@ public class Defensor extends Agente{
 
     public void paintDef(Graphics g){
         if (mov == 1){
-            g.setColor(Color.GRAY);
+            g.setColor(Color.red);
             g.fillRect(X, Y, 14, 14);
         }
         if (mov == 2){
-            g.setColor(Color.GRAY);
+            g.setColor(Color.red);
             g.fillRect(X, Y, 14, 14);
 
             g.setColor(Color.GREEN);

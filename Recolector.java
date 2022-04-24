@@ -10,8 +10,11 @@ import java.util.*;
 public class Recolector extends Agente{
     public boolean carry;
     public boolean rangoBusca;
+    public boolean rangoHuida;
     static public int auxX;
     static public int auxY;
+    private int limite = 0;
+    private int dir2;
 
     //static public int encuentraX;
     //static public int encuentraY;
@@ -164,6 +167,115 @@ public class Recolector extends Agente{
         
     }
 
+    public boolean calcularHuida(int xA, int yA){ // Cambiar el tipo de función a void
+        
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA){
+                if (Amenaza.amenazas.get(i).Y == yA - 15) { // Originalmente era 15, luego se probó con 45
+                    rangoHuida = true;
+                    dir2 = 1;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA - 15){
+                if (Amenaza.amenazas.get(i).Y == yA - 15) {
+                    rangoHuida = true;
+                    dir2 = 1;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA + 15){
+                if (Amenaza.amenazas.get(i).Y == yA - 15) {
+                    rangoHuida = true;
+                    dir2 = 1;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+        
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Ciclo que recorre la lista fichas
+            if (Amenaza.amenazas.get(i).Y == yA){
+                if (Amenaza.amenazas.get(i).X == xA + 15) {
+                    rangoHuida = true;
+                    dir2 = 0;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+        
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA){
+                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+                    rangoHuida = true;
+                    dir2 = 0;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA - 15){
+                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+                    rangoHuida = true;
+                    dir2 = 0;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
+            if (Amenaza.amenazas.get(i).X == xA + 15){
+                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+                    rangoHuida = true;
+                    dir2 = 0;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+        
+        for (int i=0;i<Amenaza.amenazas.size();i++) { // Ciclo que recorre la lista fichas
+            if (Amenaza.amenazas.get(i).Y == yA){
+                if (Amenaza.amenazas.get(i).X == xA - 15) {
+                    rangoHuida = true;
+                    dir2 = 0;
+                    //mov = 4;
+                    //auxX = Amenaza.amenazas.get(i).X;
+                    //auxY = Amenaza.amenazas.get(i).Y;
+                    return true;
+                }
+            }
+        }
+        return false;
+        
+    }
+
 
     //implementacion del metodo abstracto
     public void moverAgente(){
@@ -173,7 +285,23 @@ public class Recolector extends Agente{
         if (mov == 1){
             if (direccion == 1){
                 if (Y-15 > 0){
-                    if (rangoBusca == false){
+                    if (rangoHuida == true && rangoBusca == false){
+                        System.out.println("rangoHuida = true");
+                        if (limite == 4){
+                            rangoHuida = false;
+                            limite = 0;
+                        }
+                        else{
+                            if (dir2 == 0){
+                                Y -= 15;
+                            }
+                            else{
+                                Y += 15;
+                            }
+                            limite += 1;
+                        }
+                    }
+                    if (rangoBusca == false && rangoHuida == false){
                         if ((VerificaCoor(1, X, Y) == true) && (Obstaculo.CoorObs(1, X, Y) == true)){
                             if (Recurso.CoorRecu(1, X, Y) == true){
                                 if (Defensor.VerificaCoor2(1, X, Y) == true){
@@ -182,7 +310,7 @@ public class Recolector extends Agente{
                             }
                         }
                     }
-                    else{
+                    if (rangoBusca == true){
                         //mov = 3;
                         mov = 2;
                         System.out.println("Se va a devolver");
@@ -195,7 +323,23 @@ public class Recolector extends Agente{
             }
             if (direccion == 2){
                 if (X + 15 <= 736){
-                    if (rangoBusca == false){
+                    if (rangoHuida == true && rangoBusca == false){
+                        System.out.println("rangoHuida = true");
+                        if (limite == 4){
+                            rangoHuida = false;
+                            limite = 0;
+                        }
+                        else{
+                            if (dir2 == 0){
+                                Y -= 15;
+                            }
+                            else{
+                                Y += 15;
+                            }
+                            limite += 1;
+                        }
+                    }
+                    if (rangoBusca == false && rangoHuida == false){
                         if ((VerificaCoor(2, X, Y) == true) && (Obstaculo.CoorObs(2, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
                                 if (Defensor.VerificaCoor2(2, X, Y) == true){
@@ -204,7 +348,7 @@ public class Recolector extends Agente{
                             }
                         }
                     }
-                    else{
+                    if (rangoBusca == true){
                         //mov = 3;
                         System.out.println("Se encontró recurso");
                         mov = 2;
@@ -217,7 +361,23 @@ public class Recolector extends Agente{
             }
             if (direccion == 3){
                 if (Y+15 <= 736){
-                    if (rangoBusca == false){
+                    if (rangoHuida == true && rangoBusca == false){
+                        System.out.println("rangoHuida = true");
+                        if (limite == 4){
+                            rangoHuida = false;
+                            limite = 0;
+                        }
+                        else{
+                            if (dir2 == 0){
+                                Y -= 15;
+                            }
+                            else{
+                                Y += 15;
+                            }
+                            limite += 1;
+                        }
+                    }
+                    if (rangoBusca == false && rangoHuida == false){
                         if ((VerificaCoor(3, X, Y) == true) && (Obstaculo.CoorObs(3, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
                                 if (Defensor.VerificaCoor2(3, X, Y) == true){
@@ -226,7 +386,7 @@ public class Recolector extends Agente{
                             }
                         }
                     }
-                    else{
+                    if (rangoBusca == true){
                         //mov = 3;
                         mov = 2;
                         System.out.println("Se va a devolver");
@@ -239,7 +399,23 @@ public class Recolector extends Agente{
             }
             if (direccion == 4){
                 if (X-15 > 0){
-                    if (rangoBusca == false){
+                    if (rangoHuida == true && rangoBusca == false){
+                        System.out.println("rangoHuida = true");
+                        if (limite == 4){
+                            rangoHuida = false;
+                            limite = 0;
+                        }
+                        else{
+                            if (dir2 == 0){
+                                Y -= 15;
+                            }
+                            else{
+                                Y += 15;
+                            }
+                            limite += 1;
+                        }
+                    }
+                    if (rangoBusca == false && rangoHuida == false){
                         if ((VerificaCoor(4, X, Y) == true) && (Obstaculo.CoorObs(4, X, Y) == true)){
                             if (Recurso.CoorRecu(2, X, Y) == true){
                                 if (Defensor.VerificaCoor2(4, X, Y) == true){
@@ -248,7 +424,7 @@ public class Recolector extends Agente{
                             }
                         }
                     }
-                    else{
+                    if (rangoBusca == true){
                         //mov = 3;
                         mov = 2;
                         System.out.println("Se va a devolver");
@@ -302,18 +478,9 @@ public class Recolector extends Agente{
                 }
             }
         }
-        if (mov == 3){
-            if (X != auxX-15){
-                X -= 15;
-            }
-            else{
-                if (Y != auxY){
-                    Y -= 15;
-                }
-                else{ // Cuando llega al recurso
-                    mov = 2;
-                }
-            }
+        if (mov == 4){
+            Y += 15;
+            System.out.println("A");
         }
         
     }
@@ -324,11 +491,11 @@ public class Recolector extends Agente{
 
     public void paintRec(Graphics g){
         if (mov == 1){
-            g.setColor(Color.red);
+            g.setColor(Color.black);
             g.fillRect(X, Y, 14, 14);
         }
         if (mov == 2){
-            g.setColor(Color.red);
+            g.setColor(Color.black);
             g.fillRect(X, Y, 14, 14);
 
             g.setColor(Color.green);

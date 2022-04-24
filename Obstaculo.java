@@ -23,7 +23,7 @@ public class Obstaculo {
     }
 
     public void dibujar(Graphics g){
-        g.setColor(Color.blue);
+        g.setColor(Color.gray);
         g.fillRect(X, Y, 14, 14);
     }
 
