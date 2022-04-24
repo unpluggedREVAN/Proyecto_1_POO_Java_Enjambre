@@ -7,70 +7,67 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 
-public class Obstaculo {
-    int identificador;
-    int X;
-    int Y;
-    //int direccion;
-    static ArrayList<Obstaculo> obstaculos = new ArrayList<Obstaculo>();
+public class Obstaculo extends Objeto{
 
-    //static ArrayList<Recolector> recolectores = new ArrayList<Recolector>();
+    static ArrayList<Obstaculo> listaObstaculos = new ArrayList<Obstaculo>();
+    static int[] posObsX = new int[]{271,286,271,286, 166,181,166,181, 526,541,526,541, 496,511,496,511};
+    static int[] posObsY = new int[]{616,616,631,631, 301,301,316,316, 151,151,166,166, 481,481,496,496}; 
 
     public Obstaculo (){ 
-        identificador = 0;
-        X = 1;
-        Y = 1;
+        modo = true;
+        coorX = 1;
+        coorY = 1;
     }
 
-    public void dibujar(Graphics g){
+    public void paintObjeto(Graphics g){
         g.setColor(Color.gray);
-        g.fillRect(X, Y, 14, 14);
+        g.fillRect(coorX, coorY, 14, 14);
     }
 
-    static public boolean CoorObs(int dir, int xA, int yA){
-        if (dir == 1){
-            for (int i=0;i<obstaculos.size();i++) { // Ciclo que recorre la lista fichas
-                if (obstaculos.get(i).X == xA){
-                    if (obstaculos.get(i).Y == yA - 15) {
+    public boolean pruebaColision(int dir, int xA, int yA){
+        for (int i=0;i<listaObstaculos.size();i++){
+            if (dir == 1){
+                if (listaObstaculos.get(i).coorX == xA){
+                    if (listaObstaculos.get(i).coorY == yA - 15) {
                         return false;
                     }
                 }
             }
-            return true;
-        }
-        if (dir == 2){
-            for (int i=0;i<obstaculos.size();i++) { // Ciclo que recorre la lista fichas
-                if (obstaculos.get(i).Y == yA){
-                    if (obstaculos.get(i).X == xA + 15) {
+            if (dir == 2){
+                if (listaObstaculos.get(i).coorY == yA){
+                    if (listaObstaculos.get(i).coorX == xA + 15) {
                         return false;
                     }
                 }
             }
-            return true;
-        }
-        if (dir == 3){
-            for (int i=0;i<obstaculos.size();i++) { // Ciclo que recorre la lista fichas
-                if (obstaculos.get(i).X == xA){
-                    if (obstaculos.get(i).Y == yA + 15) {
+            if (dir == 3){
+                if (listaObstaculos.get(i).coorX == xA){
+                    if (listaObstaculos.get(i).coorY == yA + 15) {
                         return false;
                     }
                 }
             }
-            return true;
-        }
-        if (dir == 4){
-            for (int i=0;i<obstaculos.size();i++) { // Ciclo que recorre la lista fichas
-                if (obstaculos.get(i).Y == yA){
-                    if (obstaculos.get(i).X == xA - 15) {
+            if (dir == 4){
+                if (listaObstaculos.get(i).coorY == yA){
+                    if (listaObstaculos.get(i).coorX == xA - 15) {
                         return false;
                     }
                 }
             }
-            return true;
         }
         return true;
     }
 
-    //public abstract void moverAgente();
-    //public abstract void accionAgente();
+    public void verificaEstado(){
+        modo = true;
+    }
+    public void reacciona(){
+        modo = true;
+    }
+    public void respawnObjeto(){
+        modo = true;
+    }
+    public void bajarVida(){
+        modo = true;
+    }
 }

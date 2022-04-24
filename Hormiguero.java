@@ -1,27 +1,22 @@
 // Proyecto enjambre - POO
-// Diana Sanabria (-) / Jose Pablo Agüero Mora (2021126372) 
+// Diana Sanabria (2021436548) / Jose Pablo Agüero Mora (2021126372) 
 // Clase Hormiguero
 
 import java.awt.Graphics;
 import java.awt.Color;
 
 public class Hormiguero {
-    int identificador;
-    static int X;
-    static int Y;
+    static int settingFila;
+    static int settingCol;
     boolean activo;
-    //int direccion;
-
-    //static ArrayList<Recolector> recolectores = new ArrayList<Recolector>();
 
     public Hormiguero (){ 
-        identificador = 0;
-        X = 1;
-        Y = 1;
+        settingFila = 1;
+        settingCol = 1;
     }
 
-    public void dibujar(Graphics g){
+    public void paintHormiguero(Graphics g){
         g.setColor(Color.ORANGE);
-        g.fillRect(X, Y, 14, 14);
+        g.fillRect(settingFila, settingCol, 14, 14);
     }
 }

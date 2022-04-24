@@ -74,89 +74,89 @@ public class Defensor extends Agente{
 
     public boolean calcularArea(int xA, int yA){
         
-        for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
-            if (Recurso.recursos.get(i).X == xA){
-                if (Recurso.recursos.get(i).Y == yA - 15) { // Originalmente era 15, luego se probó con 45
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
+            if (Recurso.listaRecursos1.get(i).coorX == xA){
+                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) { // Originalmente era 15, luego se probó con 45
                     rangoBusca = true;
-                    auxX = Recurso.recursos.get(i).X;
-                    auxY = Recurso.recursos.get(i).Y;
+                    auxX = Recurso.listaRecursos1.get(i).coorX;
+                    auxY = Recurso.listaRecursos1.get(i).coorY;
                     return true;
                 }
             }
         }
 
-        for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
-            if (Recurso.recursos.get(i).X == xA - 15){
-                if (Recurso.recursos.get(i).Y == yA - 15) {
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
+            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){
+                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) {
                     rangoBusca = true;
-                    auxX = Recurso.recursos.get(i).X;
-                    auxY = Recurso.recursos.get(i).Y;
+                    auxX = Recurso.listaRecursos1.get(i).coorX;
+                    auxY = Recurso.listaRecursos1.get(i).coorY;
                     return true;
                 }
             }
         }
 
-        for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
-            if (Recurso.recursos.get(i).X == xA + 15){
-                if (Recurso.recursos.get(i).Y == yA - 15) {
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
+            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){
+                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) {
                     rangoBusca = true;
-                    auxX = Recurso.recursos.get(i).X;
-                    auxY = Recurso.recursos.get(i).Y;
+                    auxX = Recurso.listaRecursos1.get(i).coorX;
+                    auxY = Recurso.listaRecursos1.get(i).coorY;
                     return true;
                 }
             }
         }
         
-        for (int i=0;i<Recurso.recursos.size();i++) { // Ciclo que recorre la lista fichas
-            if (Recurso.recursos.get(i).Y == yA){
-                if (Recurso.recursos.get(i).X == xA + 15) {
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Ciclo que recorre la lista fichas
+            if (Recurso.listaRecursos1.get(i).coorY == yA){
+                if (Recurso.listaRecursos1.get(i).coorX == xA + 15) {
                     rangoBusca = true;
-                    auxX = Recurso.recursos.get(i).X;
-                    auxY = Recurso.recursos.get(i).Y;
+                    auxX = Recurso.listaRecursos1.get(i).coorX;
+                    auxY = Recurso.listaRecursos1.get(i).coorY;
                     return true;
                 }
             }
         }
         
-        for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
-            if (Recurso.recursos.get(i).X == xA){
-                if (Recurso.recursos.get(i).Y == yA + 15) {
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
+            if (Recurso.listaRecursos1.get(i).coorX == xA){
+                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
                     rangoBusca = true;
-                    auxX = Recurso.recursos.get(i).X;
-                    auxY = Recurso.recursos.get(i).Y;
+                    auxX = Recurso.listaRecursos1.get(i).coorX;
+                    auxY = Recurso.listaRecursos1.get(i).coorY;
                     return true;
                 }
             }
         }
 
-        for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
-            if (Recurso.recursos.get(i).X == xA - 15){
-                if (Recurso.recursos.get(i).Y == yA + 15) {
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
+            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){
+                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
                     rangoBusca = true;
-                    auxX = Recurso.recursos.get(i).X;
-                    auxY = Recurso.recursos.get(i).Y;
+                    auxX = Recurso.listaRecursos1.get(i).coorX;
+                    auxY = Recurso.listaRecursos1.get(i).coorY;
                     return true;
                 }
             }
         }
 
-        for (int i=0;i<Recurso.recursos.size();i++) { // Potencial
-            if (Recurso.recursos.get(i).X == xA + 15){
-                if (Recurso.recursos.get(i).Y == yA + 15) {
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
+            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){
+                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
                     rangoBusca = true;
-                    auxX = Recurso.recursos.get(i).X;
-                    auxY = Recurso.recursos.get(i).Y;
+                    auxX = Recurso.listaRecursos1.get(i).coorX;
+                    auxY = Recurso.listaRecursos1.get(i).coorY;
                     return true;
                 }
             }
         }
         
-        for (int i=0;i<Recurso.recursos.size();i++) { // Ciclo que recorre la lista fichas
-            if (Recurso.recursos.get(i).Y == yA){
-                if (Recurso.recursos.get(i).X == xA - 15) {
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Ciclo que recorre la lista fichas
+            if (Recurso.listaRecursos1.get(i).coorY == yA){
+                if (Recurso.listaRecursos1.get(i).coorX == xA - 15) {
                     rangoBusca = true;
-                    auxX = Recurso.recursos.get(i).X;
-                    auxY = Recurso.recursos.get(i).Y;
+                    auxX = Recurso.listaRecursos1.get(i).coorX;
+                    auxY = Recurso.listaRecursos1.get(i).coorY;
                     return true;
                 }
             }
@@ -168,9 +168,9 @@ public class Defensor extends Agente{
 
     public boolean calcularAreaAtaque(int xA, int yA){ // Cambiar el tipo de función a void
         
-        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
-            if (Amenaza.amenazas.get(i).X == xA){
-                if (Amenaza.amenazas.get(i).Y == yA - 15) { // Originalmente era 15, luego se probó con 45
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Potencial
+            if (Amenaza.listaAmenazas.get(i).coorX == xA){
+                if (Amenaza.listaAmenazas.get(i).coorY == yA - 15) { // Originalmente era 15, luego se probó con 45
                     rangoAtaca = true;
                     //mov = 4;
                     //auxX = Amenaza.amenazas.get(i).X;
@@ -180,9 +180,9 @@ public class Defensor extends Agente{
             }
         }
 
-        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
-            if (Amenaza.amenazas.get(i).X == xA - 15){
-                if (Amenaza.amenazas.get(i).Y == yA - 15) {
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Potencial
+            if (Amenaza.listaAmenazas.get(i).coorX == xA - 15){
+                if (Amenaza.listaAmenazas.get(i).coorY == yA - 15) {
                     rangoAtaca = true;
                     //mov = 4;
                     //auxX = Amenaza.amenazas.get(i).X;
@@ -192,9 +192,9 @@ public class Defensor extends Agente{
             }
         }
 
-        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
-            if (Amenaza.amenazas.get(i).X == xA + 15){
-                if (Amenaza.amenazas.get(i).Y == yA - 15) {
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Potencial
+            if (Amenaza.listaAmenazas.get(i).coorX == xA + 15){
+                if (Amenaza.listaAmenazas.get(i).coorY == yA - 15) {
                     rangoAtaca = true;
                     //mov = 4;
                     //auxX = Amenaza.amenazas.get(i).X;
@@ -204,9 +204,9 @@ public class Defensor extends Agente{
             }
         }
         
-        for (int i=0;i<Amenaza.amenazas.size();i++) { // Ciclo que recorre la lista fichas
-            if (Amenaza.amenazas.get(i).Y == yA){
-                if (Amenaza.amenazas.get(i).X == xA + 15) {
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Ciclo que recorre la lista fichas
+            if (Amenaza.listaAmenazas.get(i).coorY == yA){
+                if (Amenaza.listaAmenazas.get(i).coorX == xA + 15) {
                     rangoAtaca = true;
                     //mov = 4;
                     //auxX = Amenaza.amenazas.get(i).X;
@@ -216,9 +216,9 @@ public class Defensor extends Agente{
             }
         }
         
-        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
-            if (Amenaza.amenazas.get(i).X == xA){
-                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Potencial
+            if (Amenaza.listaAmenazas.get(i).coorX == xA){
+                if (Amenaza.listaAmenazas.get(i).coorY == yA + 15) {
                     rangoAtaca = true;
                     //mov = 4;
                     //auxX = Amenaza.amenazas.get(i).X;
@@ -228,9 +228,9 @@ public class Defensor extends Agente{
             }
         }
 
-        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
-            if (Amenaza.amenazas.get(i).X == xA - 15){
-                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Potencial
+            if (Amenaza.listaAmenazas.get(i).coorX == xA - 15){
+                if (Amenaza.listaAmenazas.get(i).coorY == yA + 15) {
                     rangoAtaca = true;
                     //mov = 4;
                     //auxX = Amenaza.amenazas.get(i).X;
@@ -240,9 +240,9 @@ public class Defensor extends Agente{
             }
         }
 
-        for (int i=0;i<Amenaza.amenazas.size();i++) { // Potencial
-            if (Amenaza.amenazas.get(i).X == xA + 15){
-                if (Amenaza.amenazas.get(i).Y == yA + 15) {
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Potencial
+            if (Amenaza.listaAmenazas.get(i).coorX == xA + 15){
+                if (Amenaza.listaAmenazas.get(i).coorY == yA + 15) {
                     rangoAtaca = true;
                     //mov = 4;
                     //auxX = Amenaza.amenazas.get(i).X;
@@ -252,9 +252,9 @@ public class Defensor extends Agente{
             }
         }
         
-        for (int i=0;i<Amenaza.amenazas.size();i++) { // Ciclo que recorre la lista fichas
-            if (Amenaza.amenazas.get(i).Y == yA){
-                if (Amenaza.amenazas.get(i).X == xA - 15) {
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Ciclo que recorre la lista fichas
+            if (Amenaza.listaAmenazas.get(i).coorY == yA){
+                if (Amenaza.listaAmenazas.get(i).coorX == xA - 15) {
                     rangoAtaca = true;
                     //mov = 4;
                     //auxX = Amenaza.amenazas.get(i).X;
@@ -275,17 +275,20 @@ public class Defensor extends Agente{
         this.direccion = numRand;
 
         if (mov == 1){
+            Recurso actual = new Recurso();
+            Obstaculo obsActual = new Obstaculo();
+            Amenaza ameActual = new Amenaza();
             if (direccion == 1){
                 if (Y-15 > 0){
                     if (rangoAtaca == true && rangoBusca == false){
                         //mov = 4;
                         System.out.println("Se encontró amenaza1");
 
-                        Amenaza.bajarVida();
+                        ameActual.bajarVida(); // Antes era Amenaza.bajarVida()
                     }
                     if (rangoBusca == false && rangoAtaca == false){
-                        if ((VerificaCoor2(1, X, Y) == true) && (Obstaculo.CoorObs(1, X, Y) == true)){
-                            if (Recurso.CoorRecu(1, X, Y) == true){
+                        if ((VerificaCoor2(1, X, Y) == true) && (obsActual.pruebaColision(1, X, Y) == true)){
+                            if (actual.pruebaColision(1, X, Y) == true){
                                 if (Recolector.VerificaCoor(1, X, Y) == true){
                                     Y -= 15;
                                 }
@@ -298,7 +301,7 @@ public class Defensor extends Agente{
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
 
-                        Recurso.bajarVida();
+                        actual.bajarVida(); // Antes era Recurso.bajarVida()
                     }
                     
                 }
@@ -309,11 +312,11 @@ public class Defensor extends Agente{
                         //mov = 4;
                         System.out.println("Se encontró amenaza1");
 
-                        Amenaza.bajarVida();
+                        ameActual.bajarVida();
                     }
                     if (rangoBusca == false && rangoAtaca == false){
-                        if ((VerificaCoor2(2, X, Y) == true) && (Obstaculo.CoorObs(2, X, Y) == true)){
-                            if (Recurso.CoorRecu(2, X, Y) == true){
+                        if ((VerificaCoor2(2, X, Y) == true) && (obsActual.pruebaColision(2, X, Y) == true)){
+                            if (actual.pruebaColision(2, X, Y) == true){
                                 if (Recolector.VerificaCoor(2, X, Y) == true){
                                     X += 15;
                                 }
@@ -326,7 +329,7 @@ public class Defensor extends Agente{
                         mov = 2;
                         System.out.println("Se va a devolver");
                         
-                        Recurso.bajarVida();
+                        actual.bajarVida();
                     }
                     
                 }
@@ -337,11 +340,11 @@ public class Defensor extends Agente{
                         //mov = 4;
                         System.out.println("Se encontró amenaza1");
 
-                        Amenaza.bajarVida();
+                        ameActual.bajarVida();
                     }
                     if (rangoBusca == false && rangoAtaca == false){
-                        if ((VerificaCoor2(3, X, Y) == true) && (Obstaculo.CoorObs(3, X, Y) == true)){
-                            if (Recurso.CoorRecu(3, X, Y) == true){
+                        if ((VerificaCoor2(3, X, Y) == true) && (obsActual.pruebaColision(3, X, Y) == true)){
+                            if (actual.pruebaColision(3, X, Y) == true){
                                 if (Recolector.VerificaCoor(3, X, Y) == true){
                                     Y += 15;
                                 }
@@ -354,7 +357,7 @@ public class Defensor extends Agente{
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
 
-                        Recurso.bajarVida();
+                        actual.bajarVida();
                     }
                     
                 }
@@ -365,11 +368,11 @@ public class Defensor extends Agente{
                         //mov = 4;
                         System.out.println("Se encontró amenaza1");
 
-                        Amenaza.bajarVida();
+                        ameActual.bajarVida();
                     }
                     if (rangoBusca == false && rangoAtaca == false){
-                        if ((VerificaCoor2(4, X, Y) == true) && (Obstaculo.CoorObs(4, X, Y) == true)){
-                            if (Recurso.CoorRecu(4, X, Y) == true){
+                        if ((VerificaCoor2(4, X, Y) == true) && (obsActual.pruebaColision(4, X, Y) == true)){
+                            if (actual.pruebaColision(4, X, Y) == true){
                                 if (Recolector.VerificaCoor(4, X, Y) == true){
                                     X -= 15;
                                 }
@@ -382,16 +385,19 @@ public class Defensor extends Agente{
                         System.out.println("Se va a devolver");
                         System.out.println("Se encontró recurso"); 
 
-                        Recurso.bajarVida();
+                        actual.bajarVida();
                     }
                 }
             }
         }
         if (mov == 2){
+            Recurso actual = new Recurso();
+            Obstaculo obsActual = new Obstaculo();
+            // incluir amenazas
             if (X != 1){
                 if (VerificaCoor2(4, X, Y) == true){
-                    if (Obstaculo.CoorObs(4, X, Y) == true){
-                        if (Recurso.CoorRecu(4, X, Y) == true){
+                    if (obsActual.pruebaColision(4, X, Y) == true){
+                        if (actual.pruebaColision(4, X, Y) == true){
                             X -= 15;
                         }
                         else{
@@ -409,8 +415,8 @@ public class Defensor extends Agente{
             else{
                 if (Y != 1){
                     if (VerificaCoor2(1, X, Y) == true){
-                        if (Obstaculo.CoorObs(4, X, Y) == true){
-                            if (Recurso.CoorRecu(4, X, Y) == true){
+                        if (obsActual.pruebaColision(4, X, Y) == true){
+                            if (actual.pruebaColision(4, X, Y) == true){
                                 Y -= 15;
                             }
                             else{
