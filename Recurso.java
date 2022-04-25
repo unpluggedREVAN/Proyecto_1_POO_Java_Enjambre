@@ -31,7 +31,7 @@ public class Recurso extends Objeto {
 
     public void verificaEstado(){
         for (int i=0;i<Recurso.listaRecursos1.size();i++){
-            if (listaRecursos1.get(i).vida == 0){
+            if (listaRecursos1.get(i).vida <= 0){
                 listaRecursos1.get(i).modo = false;
             }
             else{

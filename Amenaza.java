@@ -33,7 +33,7 @@ public class Amenaza extends Objeto{
 
     public void verificaEstado(){
         for (int i=0;i<Recurso.listaRecursos1.size();i++){
-            if (listaAmenazas.get(i).vida == 0){
+            if (listaAmenazas.get(i).vida <= 0){
                 listaAmenazas.get(i).modo = false;
             }
             else{

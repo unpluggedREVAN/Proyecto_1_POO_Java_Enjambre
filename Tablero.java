@@ -7,14 +7,18 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Tablero implements ActionListener{
     JFrame frame;
     JPanel panelBotones;
+    JPanel panelIm;
     JButton botonPrincipal;
+    JLabel simb;
 
     public Tablero(){
         frame = new JFrame("Proyecto Enjambre - POO");
@@ -40,16 +44,15 @@ public class Tablero implements ActionListener{
             int multiplo = (numRandom * 15) + 1;
 
             Recolector prRec = new Recolector();
-            prRec.X = multiplo;
+            prRec.posX = multiplo;
 
             numRandom = (int)Math.floor(Math.random()*(49-1)+1);
             multiplo = (numRandom * 15) + 1;
-            prRec.Y = multiplo;
+            prRec.posY = multiplo;
 
             prRec.rangoBusca = false;
-            prRec.mov = 1;
+            prRec.movimiento = 1;
             Recolector.recolectores.add(prRec);
-            Agente.agentes.add(prRec);
             cont += 1;
         }
     }
@@ -61,16 +64,15 @@ public class Tablero implements ActionListener{
             int multiplo = (numRandom * 15) + 1;
 
             Defensor prDef = new Defensor();
-            prDef.X = multiplo;
+            prDef.posX = multiplo;
 
             numRandom = (int)Math.floor(Math.random()*(49-1)+1);
             multiplo = (numRandom * 15) + 1;
-            prDef.Y = multiplo;
+            prDef.posY = multiplo;
 
             prDef.rangoBusca = false;
-            prDef.mov = 1;
+            prDef.movimiento = 1;
             Defensor.defensores.add(prDef);
-            Agente.agentes.add(prDef);
             cont += 1;
         }
     }
@@ -107,7 +109,7 @@ public class Tablero implements ActionListener{
     }
 
     private void crearTablero(int opcion, int x, int y){
-        frame.setBounds(50,50,860,800);
+        frame.setBounds(50,50,1145,800);
         JPanel pn = new JPanel(){
             @Override
             public void paint(Graphics g) {
@@ -120,11 +122,11 @@ public class Tablero implements ActionListener{
                 }
 
                 for (int i=0;i<Recolector.recolectores.size();i++) { 
-                    Recolector.recolectores.get(i).paintRec(g);
+                    Recolector.recolectores.get(i).paintAgente(g);
                 }
 
                 for (int i=0;i<Defensor.defensores.size();i++) { 
-                    Defensor.defensores.get(i).paintDef(g);
+                    Defensor.defensores.get(i).paintAgente(g);
                 }
 
                 for (int i=0;i<Recurso.listaRecursos1.size();i++) { 
@@ -147,6 +149,15 @@ public class Tablero implements ActionListener{
         botonPrincipal = new JButton("Partida");
         botonPrincipal.addActionListener(this);
 
+        // Sección para adjuntar la imagen
+        simb = new JLabel();
+        ImageIcon imagenInfo= new ImageIcon("D:\\Versiones de prueba finales POO proyecto Enjambre\\V Pre Release\\Proyecto_1_POO_Java_Enjambre-main\\symb.png");
+        simb.setIcon(imagenInfo);
+        panelIm = new JPanel();
+        panelIm.add(simb);
+        frame.add(panelIm,BorderLayout.WEST);
+        // Fin sección para adjuntar la imagen
+
         panelBotones = new JPanel();
         panelBotones.add(botonPrincipal);
         frame.add(panelBotones, BorderLayout.EAST);
@@ -162,15 +173,15 @@ public class Tablero implements ActionListener{
             Recurso.listaRecursos1.get(i).reacciona();
         }
         for (int i=0;i<Recolector.recolectores.size();i++) { 
-            int varX = Recolector.recolectores.get(i).X;
-            int varY = Recolector.recolectores.get(i).Y;
+            int varX = Recolector.recolectores.get(i).posX;
+            int varY = Recolector.recolectores.get(i).posY;
             Recolector.recolectores.get(i).calcularArea(varX, varY);
-            Recolector.recolectores.get(i).calcularHuida(varX, varY);
+            Recolector.recolectores.get(i).accionAgente(varX, varY);
             Recolector.recolectores.get(i).moverAgente();
         }
         for (int i=0;i<Defensor.defensores.size();i++) {
-            int varDX = Defensor.defensores.get(i).X;
-            int varDY = Defensor.defensores.get(i).Y;
+            int varDX = Defensor.defensores.get(i).posX;
+            int varDY = Defensor.defensores.get(i).posY;
             Defensor.defensores.get(i).calcularAreaAtaque(varDX, varDY);
             Defensor.defensores.get(i).calcularArea(varDX, varDY);
             Defensor.defensores.get(i).moverAgente();
