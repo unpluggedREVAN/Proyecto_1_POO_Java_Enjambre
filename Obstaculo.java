@@ -19,11 +19,13 @@ public class Obstaculo extends Objeto{
         coorY = 1;
     }
 
+    // Pinta el cuerpo en pantalla
     public void paintObjeto(Graphics g){
         g.setColor(Color.gray);
         g.fillRect(coorX, coorY, 14, 14);
     }
 
+    // Verifica que no se colisione con un obstáculo
     public boolean pruebaColision(int dir, int xA, int yA){
         for (int i=0;i<listaObstaculos.size();i++){
             if (dir == 1){

@@ -15,6 +15,7 @@ public class Hormiguero {
         settingCol = 1;
     }
 
+    // Pinta cuerpo en pantalla
     public void paintHormiguero(Graphics g){
         g.setColor(Color.ORANGE);
         g.fillRect(settingFila, settingCol, 14, 14);

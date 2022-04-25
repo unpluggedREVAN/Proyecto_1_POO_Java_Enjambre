@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.*;
 
 public class Defensor extends Agente{
-    public boolean carry; // No se usa
     public boolean rangoBusca;
     public boolean rangoAtaca;
 
@@ -18,11 +17,11 @@ public class Defensor extends Agente{
     int rnd = random.nextInt(42);
 
     public Defensor(){
-        carry = false;
         rangoBusca = false;
         rangoAtaca = false;
     }
 
+    // Pinta cuerpo en pantalla
     public void paintAgente(Graphics g){
         if (movimiento == 1){
             g.setColor(Color.red);
@@ -37,8 +36,9 @@ public class Defensor extends Agente{
         }
     }
 
+    // Verifica que no colisione con otro defensor
     public boolean verificaBusqueda(int dir, int xA, int yA){
-        for (int i=0;i<defensores.size();i++) { // Ciclo que recorre la lista fichas
+        for (int i=0;i<defensores.size();i++) { 
             if (dir == 1){
                 if (defensores.get(i).posX == xA){
                     if (defensores.get(i).posY == yA - 15) {
@@ -71,45 +71,46 @@ public class Defensor extends Agente{
         return true;
     }
 
+    // Busca recursos cercanos
     public boolean calcularArea(int xA, int yA){
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
-            if (Recurso.listaRecursos1.get(i).coorX == xA){ // 1
-                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) { // Originalmente era 15, luego se probó con 45
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { 
+            if (Recurso.listaRecursos1.get(i).coorX == xA){ 
+                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) { 
                     rangoBusca = true;
                     return true;
                 }
             }
-            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){ // 2
+            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){ 
                 if (Recurso.listaRecursos1.get(i).coorY == yA - 15) {
                     rangoBusca = true;
                     return true;
                 }
             }
-            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){ // 3
+            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){ 
                 if (Recurso.listaRecursos1.get(i).coorY == yA - 15) {
                     rangoBusca = true;
                     return true;
                 }
             }
-            if (Recurso.listaRecursos1.get(i).coorY == yA){ // 4
+            if (Recurso.listaRecursos1.get(i).coorY == yA){ 
                 if (Recurso.listaRecursos1.get(i).coorX == xA + 15) {
                     rangoBusca = true;
                     return true;
                 }
             }
-            if (Recurso.listaRecursos1.get(i).coorX == xA){ // 5
+            if (Recurso.listaRecursos1.get(i).coorX == xA){ 
                 if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
                     rangoBusca = true;
                     return true;
                 }
             }
-            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){ // 6
+            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){ 
                 if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
                     rangoBusca = true;
                     return true;
                 }
             }
-            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){ // 7
+            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){ 
                 if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
                     rangoBusca = true;
                     return true;
@@ -127,52 +128,53 @@ public class Defensor extends Agente{
         return false;
     }
 
-    public boolean accionAgente(int xA, int yA){ // Cambiar el tipo de función a void
+    // Busca amenazas cercanas para así saber que debe atacar
+    public boolean accionAgente(int xA, int yA){
 
-        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Potencial 1
+        for (int i=0;i<Amenaza.listaAmenazas.size();i++) { 
             if (Amenaza.listaAmenazas.get(i).coorX == xA){
-                if (Amenaza.listaAmenazas.get(i).coorY == yA - 15) { // Originalmente era 15, luego se probó con 45
+                if (Amenaza.listaAmenazas.get(i).coorY == yA - 15) { 
                     rangoAtaca = true;
                     return true;
                 }
             }
-            if (Amenaza.listaAmenazas.get(i).coorX == xA - 15){ // 2
+            if (Amenaza.listaAmenazas.get(i).coorX == xA - 15){ 
                 if (Amenaza.listaAmenazas.get(i).coorY == yA - 15) {
                     rangoAtaca = true;
                     return true;
                 }
             }
-            if (Amenaza.listaAmenazas.get(i).coorX == xA + 15){ // 3
+            if (Amenaza.listaAmenazas.get(i).coorX == xA + 15){ 
                 if (Amenaza.listaAmenazas.get(i).coorY == yA - 15) {
                     rangoAtaca = true;
                     return true;
                 }
             }
-            if (Amenaza.listaAmenazas.get(i).coorY == yA){ // 4
+            if (Amenaza.listaAmenazas.get(i).coorY == yA){ 
                 if (Amenaza.listaAmenazas.get(i).coorX == xA + 15) {
                     rangoAtaca = true;
                     return true;
                 }
             }
-            if (Amenaza.listaAmenazas.get(i).coorX == xA){ // 5
+            if (Amenaza.listaAmenazas.get(i).coorX == xA){ 
                 if (Amenaza.listaAmenazas.get(i).coorY == yA + 15) {
                     rangoAtaca = true;
                     return true;
                 }
             }
-            if (Amenaza.listaAmenazas.get(i).coorX == xA - 15){ // 6
+            if (Amenaza.listaAmenazas.get(i).coorX == xA - 15){ 
                 if (Amenaza.listaAmenazas.get(i).coorY == yA + 15) {
                     rangoAtaca = true;
                     return true;
                 }
             }
-            if (Amenaza.listaAmenazas.get(i).coorX == xA + 15){ // 7
+            if (Amenaza.listaAmenazas.get(i).coorX == xA + 15){ 
                 if (Amenaza.listaAmenazas.get(i).coorY == yA + 15) {
                     rangoAtaca = true;
                     return true;
                 }
             }
-            if (Amenaza.listaAmenazas.get(i).coorY == yA){ // 8
+            if (Amenaza.listaAmenazas.get(i).coorY == yA){ 
                 if (Amenaza.listaAmenazas.get(i).coorX == xA - 15) {
                     rangoAtaca = true;
                     return true;
@@ -183,10 +185,12 @@ public class Defensor extends Agente{
         return false;
     }
 
+    // Desplaza el cuerpo del defensor según el set de movimiento o los objetos que tenga cerca
     public void moverAgente(){
         int numRand = (int)Math.floor(Math.random()*(4-1+1)+1);
         this.direccion = numRand;
 
+        // Primer set de movimiento = Búsqueda de objetivos y reacciones
         if (movimiento == 1){
             Recurso actual = new Recurso();
             Obstaculo obsActual = new Obstaculo();
@@ -195,8 +199,7 @@ public class Defensor extends Agente{
             
             if (rangoAtaca == true && rangoBusca == false){
                 if ((posY-15 > 0) && (posX + 15 <= 736) && (posY+15 <= 736) && (posX-15 > 0)){
-                    System.out.println("Se encontró amenaza1");
-                    ameActual.bajarVida(); // Antes era Amenaza.bajarVida()
+                    ameActual.bajarVida();
                 }
             }
             if (rangoBusca == false && rangoAtaca == false){
@@ -226,15 +229,13 @@ public class Defensor extends Agente{
                 }
             }
             if (rangoBusca == true){
-                //mov = 3;
-                movimiento = 2;
-                System.out.println("Se va a devolver");
-                System.out.println("Se encontró recurso"); 
+                movimiento = 2; 
                 rangoBusca = false;
-                actual.bajarVida(); // Antes era Recurso.bajarVida()
+                actual.bajarVida();
             }
         }
 
+        // Segundo set de movimiento = Ruta de vuelta al hormiguero
         if (movimiento == 2){
             Recurso actual = new Recurso();
             Obstaculo obsActual = new Obstaculo();
@@ -242,7 +243,7 @@ public class Defensor extends Agente{
             Amenaza ameActual = new Amenaza();
             if (posX != 1){
                 if ((verificaBusqueda(4, posX, posY) == true) && (recActual.verificaBusqueda(4, posX, posY) == true)){
-                    if ((ameActual.pruebaColision(4, posX, posY) == true) && actual.pruebaColision(4, posX, posY) == true){
+                    if ((ameActual.pruebaColision(4, posX, posY) == true) && (actual.pruebaColision(4, posX, posY) == true)){
                         if (obsActual.pruebaColision(4, posX, posY) == true){
                             posX -= 15;
                         }
@@ -282,9 +283,5 @@ public class Defensor extends Agente{
                 }
             }
         }
-        /*if (mov == 4){
-            Y += 15;
-            System.out.println("A");
-        } */
     }
 }

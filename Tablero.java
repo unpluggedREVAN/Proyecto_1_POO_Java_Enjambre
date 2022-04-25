@@ -18,7 +18,7 @@ public class Tablero implements ActionListener{
     JPanel panelBotones;
     JPanel panelIm;
     JButton botonPrincipal;
-    JLabel simb;
+    JLabel simbolo;
 
     public Tablero(){
         frame = new JFrame("Proyecto Enjambre - POO");
@@ -29,6 +29,7 @@ public class Tablero implements ActionListener{
         ordenaElementos();
     }
 
+    // Crea todas las instancias de las demás clases
     public void ordenaElementos(){
         ingresaRecolector();
         ingresaDefensor();
@@ -37,9 +38,10 @@ public class Tablero implements ActionListener{
         ingresaAmenaza();
     }
 
+    // Crea las instancias de Recolector
     public void ingresaRecolector (){ // Método prueba
         int cont = 0;
-        while (cont <= 16){
+        while (cont <= 18){ // 16
             int numRandom = (int)Math.floor(Math.random()*(49-1)+1);
             int multiplo = (numRandom * 15) + 1;
 
@@ -57,9 +59,10 @@ public class Tablero implements ActionListener{
         }
     }
 
+    // Crea las instancias de Defensor
     public void ingresaDefensor (){ // Método prueba
         int cont = 0;
-        while (cont <= 17){
+        while (cont <= 22){ // 17
             int numRandom = (int)Math.floor(Math.random()*(49-1)+1);
             int multiplo = (numRandom * 15) + 1;
 
@@ -77,6 +80,7 @@ public class Tablero implements ActionListener{
         }
     }
 
+    // Crea las instancias de Obstaculo
     public void ingresaObstaculo (){ // Método prueba
         for (int i = 0; i < Obstaculo.posObsX.length; i++){
             Obstaculo prObs = new Obstaculo();
@@ -86,7 +90,8 @@ public class Tablero implements ActionListener{
         }
     }
 
-    public void ingresaRecurso (){ // Método prueba // Aquí tiraba la excepción del out of bounds
+    // Crea las instancias de Recurso
+    public void ingresaRecurso (){ 
         for (int i = 0; i < Recurso.posRecuX.length; i++){
             Recurso prRecu = new Recurso();
             prRecu.coorX = Recurso.posRecuX[i];
@@ -97,6 +102,7 @@ public class Tablero implements ActionListener{
         insRecurso.respawnObjeto();
     }
 
+    // Crea las instancias de Amenaza
     public void ingresaAmenaza (){ // Método prueba
         for (int i = 0; i < Amenaza.posAmeX.length; i++){
             Amenaza prAme = new Amenaza();
@@ -108,6 +114,7 @@ public class Tablero implements ActionListener{
         insAmenaza.respawnObjeto();
     }
 
+    // Genera el tablero inlcuyendo todos los elementos
     private void crearTablero(int opcion, int x, int y){
         frame.setBounds(50,50,1145,800);
         JPanel pn = new JPanel(){
@@ -149,12 +156,12 @@ public class Tablero implements ActionListener{
         botonPrincipal = new JButton("Partida");
         botonPrincipal.addActionListener(this);
 
-        // Sección para adjuntar la imagen
-        simb = new JLabel();
+        // Sección para adjuntar la imagen - Se debe cambiar la ruta según cada caso
+        simbolo = new JLabel();
         ImageIcon imagenInfo= new ImageIcon("D:\\Versiones de prueba finales POO proyecto Enjambre\\V Pre Release\\Proyecto_1_POO_Java_Enjambre-main\\symb.png");
-        simb.setIcon(imagenInfo);
+        simbolo.setIcon(imagenInfo);
         panelIm = new JPanel();
-        panelIm.add(simb);
+        panelIm.add(simbolo);
         frame.add(panelIm,BorderLayout.WEST);
         // Fin sección para adjuntar la imagen
 
@@ -163,6 +170,7 @@ public class Tablero implements ActionListener{
         frame.add(panelBotones, BorderLayout.EAST);
     }
 
+    // Recorre todas las listas para invocar los métodos correspondientes en cada caso
     public void moverTodos(){
         for (int i=0;i<Amenaza.listaAmenazas.size();i++){
             Amenaza.listaAmenazas.get(i).verificaEstado();
@@ -182,14 +190,13 @@ public class Tablero implements ActionListener{
         for (int i=0;i<Defensor.defensores.size();i++) {
             int varDX = Defensor.defensores.get(i).posX;
             int varDY = Defensor.defensores.get(i).posY;
-            //Defensor insDef = new Defensor();
-            //insDef.calcularArea(varDX, varDY);
             Defensor.defensores.get(i).accionAgente(varDX, varDY);
             Defensor.defensores.get(i).calcularArea(varDX, varDY);
             Defensor.defensores.get(i).moverAgente();
         }
     }
 
+    // Método con instrucciones cuando se presiona el botón
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(botonPrincipal)){

@@ -14,10 +14,11 @@ public class Recurso extends Objeto {
     public Recurso (){ 
         coorX = 1;
         coorY = 1;
-        vida = 2;
+        vida = 10;
         modo = true;
     }
 
+    // Pinta el cuerpo en pantalla
     public void paintObjeto(Graphics g){
         if (vida > 0){
             g.setColor(Color.green);
@@ -29,6 +30,7 @@ public class Recurso extends Objeto {
         }
     }
 
+    // Comprueba si el recurso sigue activo
     public void verificaEstado(){
         for (int i=0;i<Recurso.listaRecursos1.size();i++){
             if (listaRecursos1.get(i).vida <= 0){
@@ -40,6 +42,7 @@ public class Recurso extends Objeto {
         }
     }
 
+    // Baja la vida cuando se le quita una unidad de recurso
     public void bajarVida(){
         for (int i=0;i<listaRecursos1.size();i++){
             listaRecursos1.get(i).vida -= 1;
@@ -47,14 +50,16 @@ public class Recurso extends Objeto {
         
     }
 
+    // Verifica si ha muerto para hacerlo reaparecer
     public void reacciona(){
-        if (modo == false){ // if (vida <= 0){
+        if (modo == false){ 
             respawnObjeto();
-            vida = 2;
+            vida = 10;
             modo = true;
         }
     }
 
+    // Hace reaparecer los cuerpos en coordenadas aleatorias
     public void respawnObjeto(){
         int numRandom = (int)Math.floor(Math.random()*(49-1)+1);
         int multiplo = (numRandom * 15) + 1;
@@ -81,6 +86,7 @@ public class Recurso extends Objeto {
         }
     }
 
+    // Verifica que no se colisione con un recurso
     public boolean pruebaColision(int dir, int xA, int yA){
         for (int i=0;i<listaRecursos1.size();i++){
             if (dir == 1){
@@ -114,48 +120,4 @@ public class Recurso extends Objeto {
         }
         return true;
     }
-
-    /*public boolean pruebaColision(int dir, int xA, int yA){
-        if (dir == 1){
-            for (int i=0;i<listaRecursos1.size();i++) { // Ciclo que recorre la lista fichas
-                if (listaRecursos1.get(i).coorX == xA){
-                    if (listaRecursos1.get(i).coorY == yA - 15) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        if (dir == 2){
-            for (int i=0;i<listaRecursos1.size();i++) { // Ciclo que recorre la lista fichas
-                if (listaRecursos1.get(i).coorY == yA){
-                    if (listaRecursos1.get(i).coorX == xA + 15) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        if (dir == 3){
-            for (int i=0;i<listaRecursos1.size();i++) { // Ciclo que recorre la lista fichas
-                if (listaRecursos1.get(i).coorX == xA){
-                    if (listaRecursos1.get(i).coorY == yA + 15) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        if (dir == 4){
-            for (int i=0;i<listaRecursos1.size();i++) { // Ciclo que recorre la lista fichas
-                if (listaRecursos1.get(i).coorY == yA){
-                    if (listaRecursos1.get(i).coorX == xA - 15) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return true;
-    }*/
 }

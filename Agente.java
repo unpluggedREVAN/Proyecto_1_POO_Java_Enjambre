@@ -17,86 +17,10 @@ public abstract class Agente {
         direccion = 0;
     }
 
+    // Se van a usar con polimorfismo
     public abstract void moverAgente();
     public abstract boolean accionAgente(int xA, int yA);
     public abstract void paintAgente(Graphics g);
     public abstract boolean verificaBusqueda(int dir, int xA, int yA);
     public abstract boolean calcularArea(int xA, int yA);
-
-    /*public boolean calcularArea(int xA, int yA){
-        
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
-            if (Recurso.listaRecursos1.get(i).coorX == xA){
-                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) { // Originalmente era 15, luego se probó con 45
-                    rangoBusca = true;
-                    return true;
-                }
-            }
-        }
-
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
-            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){
-                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) {
-                    rangoBusca = true;
-                    return true;
-                }
-            }
-        }
-
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
-            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){
-                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) {
-                    rangoBusca = true;
-                    return true;
-                }
-            }
-        }
-        
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Ciclo que recorre la lista fichas
-            if (Recurso.listaRecursos1.get(i).coorY == yA){
-                if (Recurso.listaRecursos1.get(i).coorX == xA + 15) {
-                    rangoBusca = true;
-                    return true;
-                }
-            }
-        }
-        
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
-            if (Recurso.listaRecursos1.get(i).coorX == xA){
-                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
-                    rangoBusca = true;
-                    return true;
-                }
-            }
-        }
-
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
-            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){
-                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
-                    rangoBusca = true;
-                    return true;
-                }
-            }
-        }
-
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
-            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){
-                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
-                    rangoBusca = true;
-                    return true;
-                }
-            }
-        }
-        
-        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Ciclo que recorre la lista fichas
-            if (Recurso.listaRecursos1.get(i).coorY == yA){
-                if (Recurso.listaRecursos1.get(i).coorX == xA - 15) {
-                    rangoBusca = true;
-                    return true;
-                }
-            }
-        }
-        rangoBusca = false;
-        return false;
-    } */
 }

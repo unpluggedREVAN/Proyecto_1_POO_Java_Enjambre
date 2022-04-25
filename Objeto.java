@@ -5,7 +5,7 @@
 import java.awt.Graphics;
 
 public abstract class Objeto {
-    boolean modo; // se llama modo
+    boolean modo; 
     int vida;
     int coorX;
     int coorY;
@@ -16,6 +16,7 @@ public abstract class Objeto {
         coorY = 1;
     }
 
+    // Se van a usar con polimorfismo
     public abstract void verificaEstado();
     public abstract void reacciona();
     public abstract void bajarVida();
