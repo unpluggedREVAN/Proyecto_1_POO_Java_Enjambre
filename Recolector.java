@@ -73,6 +73,62 @@ public class Recolector extends Agente{
         return true;
     }
 
+    public boolean calcularArea(int xA, int yA){
+        for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
+            if (Recurso.listaRecursos1.get(i).coorX == xA){ // 1
+                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) { // Originalmente era 15, luego se probó con 45
+                    rangoBusca = true;
+                    return true;
+                }
+            }
+            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){ // 2
+                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) {
+                    rangoBusca = true;
+                    return true;
+                }
+            }
+            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){ // 3
+                if (Recurso.listaRecursos1.get(i).coorY == yA - 15) {
+                    rangoBusca = true;
+                    return true;
+                }
+            }
+            if (Recurso.listaRecursos1.get(i).coorY == yA){ // 4
+                if (Recurso.listaRecursos1.get(i).coorX == xA + 15) {
+                    rangoBusca = true;
+                    return true;
+                }
+            }
+            if (Recurso.listaRecursos1.get(i).coorX == xA){ // 5
+                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
+                    rangoBusca = true;
+                    return true;
+                }
+            }
+            if (Recurso.listaRecursos1.get(i).coorX == xA - 15){ // 6
+                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
+                    rangoBusca = true;
+                    return true;
+                }
+            }
+            if (Recurso.listaRecursos1.get(i).coorX == xA + 15){ // 7
+                if (Recurso.listaRecursos1.get(i).coorY == yA + 15) {
+                    rangoBusca = true;
+                    return true;
+                }
+            }
+            if (Recurso.listaRecursos1.get(i).coorY == yA){
+                if (Recurso.listaRecursos1.get(i).coorX == xA - 15) {
+                    rangoBusca = true;
+                    return true;
+                }
+            }
+            
+        }
+        rangoBusca = false;
+        return false;
+    }
+
     public boolean accionAgente(int xA, int yA){ // Cambiar el tipo de función a void
 
         for (int i=0;i<Amenaza.listaAmenazas.size();i++) { // Potencial 1
@@ -143,6 +199,7 @@ public class Recolector extends Agente{
         if (movimiento == 1){
             Recurso actual2 = new Recurso();
             Obstaculo obsActual2 = new Obstaculo();
+            Defensor defActual2 = new Defensor();
             
             if (rangoHuida == true && rangoBusca == false){
                 if ((posY-15 > 0) && (posX + 15 <= 736) && (posY+15 <= 736) && (posX-15 > 0)){
@@ -164,7 +221,7 @@ public class Recolector extends Agente{
 
             }
             if (rangoBusca == false && rangoHuida == false){
-                if ((verificaBusqueda(direccion, posX, posY) == true) && (Defensor.VerificaCoor2(direccion, posX, posY) == true)){
+                if ((verificaBusqueda(direccion, posX, posY) == true) && (defActual2.verificaBusqueda(direccion, posX, posY) == true)){
                     if (obsActual2.pruebaColision(direccion, posX, posY) == true){
                         if (direccion == 1){
                             if (posY-15 > 0){
@@ -203,8 +260,9 @@ public class Recolector extends Agente{
             Recurso actual2 = new Recurso();
             Obstaculo obsActual2 = new Obstaculo();
             Amenaza ameActual2 = new Amenaza();
+            Defensor defActual2 = new Defensor();
             if (posX != 1){
-                if ((verificaBusqueda(4, posX, posY) == true) && (Defensor.VerificaCoor2(4, posX, posY) == true)){
+                if ((verificaBusqueda(4, posX, posY) == true) && (defActual2.verificaBusqueda(4, posX, posY) == true)){
                     if ((ameActual2.pruebaColision(4, posX, posY) == true) && actual2.pruebaColision(4, posX, posY) == true){
                         if (obsActual2.pruebaColision(4, posX, posY) == true){
                             posX -= 15;
@@ -223,7 +281,7 @@ public class Recolector extends Agente{
             }
             else{
                 if (posY != 1){
-                    if ((verificaBusqueda(1, posX, posY) == true) && (Defensor.VerificaCoor2(1, posX, posY) == true)){
+                    if ((verificaBusqueda(1, posX, posY) == true) && (defActual2.verificaBusqueda(1, posX, posY) == true)){
                         if ((ameActual2.pruebaColision(1, posX, posY) == true) && actual2.pruebaColision(1, posX, posY) == true){
                             if (obsActual2.pruebaColision(1, posX, posY) == true){
                                 posY -= 15;

@@ -182,7 +182,9 @@ public class Tablero implements ActionListener{
         for (int i=0;i<Defensor.defensores.size();i++) {
             int varDX = Defensor.defensores.get(i).posX;
             int varDY = Defensor.defensores.get(i).posY;
-            Defensor.defensores.get(i).calcularAreaAtaque(varDX, varDY);
+            //Defensor insDef = new Defensor();
+            //insDef.calcularArea(varDX, varDY);
+            Defensor.defensores.get(i).accionAgente(varDX, varDY);
             Defensor.defensores.get(i).calcularArea(varDX, varDY);
             Defensor.defensores.get(i).moverAgente();
         }

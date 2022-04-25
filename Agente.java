@@ -21,8 +21,9 @@ public abstract class Agente {
     public abstract boolean accionAgente(int xA, int yA);
     public abstract void paintAgente(Graphics g);
     public abstract boolean verificaBusqueda(int dir, int xA, int yA);
+    public abstract boolean calcularArea(int xA, int yA);
 
-    public boolean calcularArea(int xA, int yA){
+    /*public boolean calcularArea(int xA, int yA){
         
         for (int i=0;i<Recurso.listaRecursos1.size();i++) { // Potencial
             if (Recurso.listaRecursos1.get(i).coorX == xA){
@@ -97,5 +98,5 @@ public abstract class Agente {
         }
         rangoBusca = false;
         return false;
-    }
+    } */
 }
