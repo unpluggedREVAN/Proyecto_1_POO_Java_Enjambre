@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.event.*;
 
 import javax.swing.ImageIcon;
+import java.net.URL;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -157,13 +158,14 @@ public class Tablero implements ActionListener{
         botonPrincipal.addActionListener(this);
 
         // Sección para adjuntar la imagen - Se debe cambiar la ruta según cada caso
-        simbolo = new JLabel();
-        ImageIcon imagenInfo= new ImageIcon("D:\\Versiones de prueba finales POO proyecto Enjambre\\V Pre Release\\Proyecto_1_POO_Java_Enjambre-main\\symb.png");
+        URL urlImagen = Tablero.class.getClassLoader().getResource("symb.png");
+        ImageIcon imagenInfo = new ImageIcon(urlImagen);
+        simbolo = new JLabel(imagenInfo);
         simbolo.setIcon(imagenInfo);
         panelIm = new JPanel();
         panelIm.add(simbolo);
         frame.add(panelIm,BorderLayout.WEST);
-        // Fin sección para adjuntar la imagen
+        // Fin sección para adjuntar la imagen 
 
         panelBotones = new JPanel();
         panelBotones.add(botonPrincipal);
